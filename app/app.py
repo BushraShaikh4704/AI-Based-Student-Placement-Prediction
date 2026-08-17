@@ -28,7 +28,7 @@ student_name = st.text_input("Student Name")
 
 branch = st.selectbox(
     "Branch",
-    ["CSE", "IT", "ECE", "EEE", "Mechanical", "Civil", "Other"]
+    ["CSE", "IT", "ECE", "EE", "ME", "CE", "Chemical"]
 )
 
 college_tier = st.selectbox(
@@ -84,10 +84,10 @@ dsa_score = st.slider(
 
 aptitude_score = st.slider(
     "Aptitude Score",
-    min_value=0.0,
-    max_value=10.0,
-    value=5.0,
-    step=0.5
+    min_value=20.0,
+    max_value=100.0,
+    value=65.0,
+    step=1.0
 )
 
 communication_skills = st.slider(
@@ -263,47 +263,268 @@ if st.button("🎯 Predict & Recommend"):
         best_model.predict_proba(student_encoded)[0][1] * 100
     )
 
-
     # ==========================================
-    # Career Recommendation
+    # Branch-Aware Career Recommendation
     # ==========================================
 
-    career_scores = {
-        "Machine Learning Engineer": (
-            ml_knowledge
-            + coding_skills
-            + dsa_score
-            + system_design
-        ) / 4,
+    branch_career_pools = {
 
-        "Data Analyst": (
-            aptitude_score
-            + communication_skills
-            + coding_skills
-            + cgpa
-        ) / 4,
+        "CSE": [
+            "Software Developer",
+            "Data Analyst",
+            "Data Scientist",
+            "Machine Learning Engineer"
+        ],
 
-        "Software Developer": (
-            coding_skills
-            + dsa_score
-            + system_design
-            + projects_count
-        ) / 4,
+        "IT": [
+            "Software Developer",
+            "Data Analyst",
+            "Data Scientist",
+            "Machine Learning Engineer"
+        ],
 
-        "Business Analyst": (
-            aptitude_score
-            + communication_skills
-            + cgpa
-            + projects_count
-        ) / 4,
+        "ECE": [
+            "Embedded Systems Engineer",
+            "VLSI Engineer",
+            "Electronics Engineer",
+            "Software Developer"
+        ],
 
-        "Data Scientist": (
-            ml_knowledge
-            + coding_skills
-            + aptitude_score
-            + cgpa
-        ) / 4
+        "EE": [
+            "Electrical Engineer",
+            "Power Systems Engineer",
+            "Embedded Systems Engineer",
+            "Control Systems Engineer"
+        ],
+
+        "ME": [
+            "Mechanical Design Engineer",
+            "Manufacturing Engineer",
+            "CAD Engineer",
+            "Production Engineer"
+        ],
+
+        "CE": [
+            "Civil Engineer",
+            "Structural Engineer",
+            "Construction Engineer",
+            "Project Engineer"
+        ],
+
+        "Chemical": [
+            "Chemical Engineer",
+            "Process Engineer",
+            "Production Engineer",
+            "Quality Engineer"
+        ]
     }
+
+    career_weights = {
+
+        "Software Developer": {
+            "coding_skills": 0.30,
+            "dsa_score": 0.25,
+            "projects_count": 0.20,
+            "internships": 0.10,
+            "cgpa": 0.10,
+            "communication_skills": 0.05
+        },
+
+        "Data Analyst": {
+            "aptitude_score": 0.30,
+            "communication_skills": 0.25,
+            "coding_skills": 0.10,
+            "projects_count": 0.15,
+            "internships": 0.10,
+            "cgpa": 0.10
+        },
+
+        "Data Scientist": {
+            "ml_knowledge": 0.30,
+            "coding_skills": 0.20,
+            "aptitude_score": 0.15,
+            "projects_count": 0.15,
+            "cgpa": 0.10,
+            "internships": 0.10
+        },
+
+        "Machine Learning Engineer": {
+            "ml_knowledge": 0.30,
+            "coding_skills": 0.25,
+            "dsa_score": 0.15,
+            "projects_count": 0.15,
+            "internships": 0.10,
+            "cgpa": 0.05
+        },
+
+        "Embedded Systems Engineer": {
+            "coding_skills": 0.25,
+            "dsa_score": 0.15,
+            "projects_count": 0.20,
+            "internships": 0.15,
+            "cgpa": 0.15,
+            "communication_skills": 0.10
+        },
+
+        "VLSI Engineer": {
+            "dsa_score": 0.10,
+            "projects_count": 0.25,
+            "internships": 0.20,
+            "cgpa": 0.25,
+            "aptitude_score": 0.10,
+            "certifications": 0.10
+        },
+
+        "Electronics Engineer": {
+            "projects_count": 0.25,
+            "internships": 0.20,
+            "cgpa": 0.20,
+            "aptitude_score": 0.15,
+            "communication_skills": 0.10,
+            "certifications": 0.10
+        },
+
+        "Electrical Engineer": {
+            "projects_count": 0.25,
+            "internships": 0.20,
+            "cgpa": 0.25,
+            "aptitude_score": 0.15,
+            "certifications": 0.15
+        },
+
+        "Power Systems Engineer": {
+            "projects_count": 0.25,
+            "internships": 0.25,
+            "cgpa": 0.25,
+            "aptitude_score": 0.15,
+            "certifications": 0.10
+        },
+
+        "Control Systems Engineer": {
+            "projects_count": 0.25,
+            "internships": 0.20,
+            "cgpa": 0.25,
+            "aptitude_score": 0.15,
+            "certifications": 0.15
+        },
+
+        "Mechanical Design Engineer": {
+            "projects_count": 0.25,
+            "internships": 0.20,
+            "cgpa": 0.25,
+            "aptitude_score": 0.15,
+            "certifications": 0.15
+        },
+
+        "Manufacturing Engineer": {
+            "projects_count": 0.25,
+            "internships": 0.25,
+            "cgpa": 0.20,
+            "aptitude_score": 0.15,
+            "certifications": 0.15
+        },
+
+        "CAD Engineer": {
+            "projects_count": 0.30,
+            "internships": 0.20,
+            "cgpa": 0.20,
+            "certifications": 0.20,
+            "aptitude_score": 0.10
+        },
+
+        "Production Engineer": {
+            "projects_count": 0.25,
+            "internships": 0.25,
+            "cgpa": 0.20,
+            "aptitude_score": 0.15,
+            "communication_skills": 0.15
+        },
+
+        "Civil Engineer": {
+            "projects_count": 0.25,
+            "internships": 0.25,
+            "cgpa": 0.25,
+            "aptitude_score": 0.15,
+            "communication_skills": 0.10
+        },
+
+        "Structural Engineer": {
+            "projects_count": 0.25,
+            "internships": 0.20,
+            "cgpa": 0.25,
+            "aptitude_score": 0.15,
+            "certifications": 0.15
+        },
+
+        "Construction Engineer": {
+            "projects_count": 0.25,
+            "internships": 0.30,
+            "cgpa": 0.20,
+            "aptitude_score": 0.15,
+            "communication_skills": 0.10
+        },
+
+        "Project Engineer": {
+            "projects_count": 0.25,
+            "internships": 0.25,
+            "communication_skills": 0.20,
+            "cgpa": 0.20,
+            "aptitude_score": 0.10
+        },
+
+        "Chemical Engineer": {
+            "projects_count": 0.25,
+            "internships": 0.25,
+            "cgpa": 0.25,
+            "aptitude_score": 0.15,
+            "certifications": 0.10
+        },
+
+        "Process Engineer": {
+            "projects_count": 0.25,
+            "internships": 0.25,
+            "cgpa": 0.20,
+            "aptitude_score": 0.15,
+            "certifications": 0.15
+        },
+
+        "Quality Engineer": {
+            "projects_count": 0.20,
+            "internships": 0.20,
+            "cgpa": 0.20,
+            "aptitude_score": 0.20,
+            "communication_skills": 0.20
+        }
+    }
+
+    # Normalize aptitude score to 0-10 scale
+
+    normalized_aptitude_score = aptitude_score / 10
+
+    career_features = {
+        "cgpa": cgpa,
+        "aptitude_score": normalized_aptitude_score,
+        "communication_skills": communication_skills,
+        "coding_skills": coding_skills,
+        "dsa_score": dsa_score,
+        "ml_knowledge": ml_knowledge,
+        "projects_count": projects_count,
+        "internships": internships,
+        "certifications": certifications
+    }
+
+    available_careers = branch_career_pools[branch]
+
+    career_scores = {}
+
+    for career in available_careers:
+
+        score = 0
+
+        for feature, weight in career_weights[career].items():
+            score += career_features[feature] * weight
+
+        career_scores[career] = score
 
     sorted_careers = sorted(
         career_scores.items(),
