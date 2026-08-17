@@ -1,14 +1,28 @@
 import streamlit as st
 import joblib
 import pandas as pd
+import mysql.connector
 
-# Load trained model and preprocessor
+
+# ==========================================
+# Load ML Model and Preprocessor
+# ==========================================
+
 preprocessor = joblib.load("models/preprocessor.pkl")
 best_model = joblib.load("models/best_model.pkl")
 
 
+# ==========================================
+# Streamlit Application
+# ==========================================
+
 st.title("🎓 AI-Based Student Placement Prediction")
 st.subheader("Student Information")
+
+
+# ==========================================
+# Student Information
+# ==========================================
 
 student_name = st.text_input("Student Name")
 
@@ -21,6 +35,11 @@ college_tier = st.selectbox(
     "College Tier",
     ["Tier-1", "Tier-2", "Tier-3"]
 )
+
+
+# ==========================================
+# Academic Details
+# ==========================================
 
 st.subheader("📚 Academic Details")
 
@@ -39,6 +58,11 @@ backlogs = st.number_input(
     value=0,
     step=1
 )
+
+
+# ==========================================
+# Technical & Skill Details
+# ==========================================
 
 st.subheader("💻 Technical & Skill Details")
 
@@ -90,6 +114,11 @@ system_design = st.slider(
     step=0.5
 )
 
+
+# ==========================================
+# Experience & Activities
+# ==========================================
+
 st.subheader("🏆 Experience & Activities")
 
 internships = st.number_input(
@@ -140,155 +169,285 @@ extracurriculars = st.number_input(
     step=1
 )
 
+
 # ==========================================
-# Feature Engineering
+# Predict & Recommend
 # ==========================================
 
-technical_skill_score = (
-    coding_skills
-    + dsa_score
-    + ml_knowledge
-    + system_design
-) / 4
+if st.button("🎯 Predict & Recommend"):
 
-experience_score = (
-    internships
-    + projects_count
-    + certifications
-    + hackathons
-    + open_source_contributions
-    + extracurriculars
-)
+    # ==========================================
+    # Feature Engineering
+    # ==========================================
 
-has_backlog = 1 if backlogs > 0 else 0
+    technical_skill_score = (
+        coding_skills
+        + dsa_score
+        + ml_knowledge
+        + system_design
+    ) / 4
 
-maximum_skill = max(
-    coding_skills,
-    dsa_score,
-    ml_knowledge,
-    system_design
-)
+    experience_score = (
+        internships
+        + projects_count
+        + certifications
+        + hackathons
+        + open_source_contributions
+        + extracurriculars
+    )
 
-minimum_skill = min(
-    coding_skills,
-    dsa_score,
-    ml_knowledge,
-    system_design
-)
+    has_backlog = 1 if backlogs > 0 else 0
 
-technical_skill_gap = maximum_skill - minimum_skill
+    maximum_skill = max(
+        coding_skills,
+        dsa_score,
+        ml_knowledge,
+        system_design
+    )
 
+    minimum_skill = min(
+        coding_skills,
+        dsa_score,
+        ml_knowledge,
+        system_design
+    )
 
-student_data = {
-    "branch": branch,
-    "college_tier": college_tier,
-    "cgpa": cgpa,
-    "backlogs": backlogs,
-    "coding_skills": coding_skills,
-    "dsa_score": dsa_score,
-    "aptitude_score": aptitude_score,
-    "communication_skills": communication_skills,
-    "ml_knowledge": ml_knowledge,
-    "system_design": system_design,
-    "internships": internships,
-    "projects_count": projects_count,
-    "certifications": certifications,
-    "hackathons": hackathons,
-    "open_source_contributions": open_source_contributions,
-    "extracurriculars": extracurriculars,
-    "technical_skill_score": technical_skill_score,
-    "has_backlog": has_backlog,
-    "experience_score": experience_score,
-    "technical_skill_gap": technical_skill_gap
-}
-
-student_df = pd.DataFrame([student_data])
+    technical_skill_gap = maximum_skill - minimum_skill
 
 
-student_encoded = preprocessor.transform(student_df)
-prediction = best_model.predict(student_encoded)
-placement_status = "Placed" if prediction[0] == 1 else "Not Placed"
+    # ==========================================
+    # Prepare Student Data
+    # ==========================================
 
-st.subheader("📊 Placement Prediction")
-st.write(f"**Placement Status:** {placement_status}")
-
-placement_probability = best_model.predict_proba(student_encoded)[0][1] * 100
-
-st.subheader("📊 Placement Prediction")
-st.write(f"**Placement Status:** {placement_status}")
-st.write(f"**Placement Probability:** {placement_probability:.2f}%")
-
-
-career_weights = {
-    'Data Scientist': {
-        'coding_skills': 0.2,
-        'dsa_score': 0.1,
-        'ml_knowledge': 0.25,
-        'projects_count': 0.2,
-        'internships': 0.1,
-        'aptitude_score': 0.1,
-        'communication_skills': 0.05
-    },
-
-    'Data Analyst': {
-        'coding_skills': 0.1,
-        'dsa_score': 0.05,
-        'ml_knowledge': 0.1,
-        'projects_count': 0.15,
-        'internships': 0.1,
-        'aptitude_score': 0.25,
-        'communication_skills': 0.25
-    },
-
-    'Machine Learning Engineer': {
-        'coding_skills': 0.25,
-        'dsa_score': 0.15,
-        'ml_knowledge': 0.3,
-        'projects_count': 0.15,
-        'internships': 0.05,
-        'aptitude_score': 0.05,
-        'communication_skills': 0.05
-    },
-
-    'Software Developer': {
-        'coding_skills': 0.3,
-        'dsa_score': 0.25,
-        'ml_knowledge': 0.05,
-        'projects_count': 0.2,
-        'internships': 0.05,
-        'aptitude_score': 0.1,
-        'communication_skills': 0.05
-    },
-
-    'Business Analyst': {
-        'coding_skills': 0.05,
-        'dsa_score': 0.05,
-        'ml_knowledge': 0.05,
-        'projects_count': 0.15,
-        'internships': 0.1,
-        'aptitude_score': 0.3,
-        'communication_skills': 0.3
+    student_data = {
+        "branch": branch,
+        "college_tier": college_tier,
+        "cgpa": cgpa,
+        "backlogs": backlogs,
+        "coding_skills": coding_skills,
+        "dsa_score": dsa_score,
+        "aptitude_score": aptitude_score,
+        "communication_skills": communication_skills,
+        "ml_knowledge": ml_knowledge,
+        "system_design": system_design,
+        "internships": internships,
+        "projects_count": projects_count,
+        "certifications": certifications,
+        "hackathons": hackathons,
+        "open_source_contributions": open_source_contributions,
+        "extracurriculars": extracurriculars,
+        "technical_skill_score": technical_skill_score,
+        "has_backlog": has_backlog,
+        "experience_score": experience_score,
+        "technical_skill_gap": technical_skill_gap
     }
-}
+
+    student_df = pd.DataFrame([student_data])
 
 
-career_scores = {}
+    # ==========================================
+    # Placement Prediction
+    # ==========================================
 
-for career, weights in career_weights.items():
-    score = 0
+    student_encoded = preprocessor.transform(student_df)
 
-    for feature, weight in weights.items():
-        score += student_data[feature] * weight
+    prediction = best_model.predict(student_encoded)
 
-    career_scores[career] = score
+    placement_status = (
+        "Placed"
+        if prediction[0] == 1
+        else "Not Placed"
+    )
 
-ranked_careers = sorted(
-    career_scores.items(),
-    key=lambda x: x[1],
-    reverse=True
-)
+    placement_probability = (
+        best_model.predict_proba(student_encoded)[0][1] * 100
+    )
 
-recommended_career = ranked_careers[0][0]
-career_suitability_score = ranked_careers[0][1]
 
-alternative_career = ranked_careers[1][0]
+    # ==========================================
+    # Career Recommendation
+    # ==========================================
+
+    career_scores = {
+        "Machine Learning Engineer": (
+            ml_knowledge
+            + coding_skills
+            + dsa_score
+            + system_design
+        ) / 4,
+
+        "Data Analyst": (
+            aptitude_score
+            + communication_skills
+            + coding_skills
+            + cgpa
+        ) / 4,
+
+        "Software Developer": (
+            coding_skills
+            + dsa_score
+            + system_design
+            + projects_count
+        ) / 4,
+
+        "Business Analyst": (
+            aptitude_score
+            + communication_skills
+            + cgpa
+            + projects_count
+        ) / 4,
+
+        "Data Scientist": (
+            ml_knowledge
+            + coding_skills
+            + aptitude_score
+            + cgpa
+        ) / 4
+    }
+
+    sorted_careers = sorted(
+        career_scores.items(),
+        key=lambda x: x[1],
+        reverse=True
+    )
+
+    recommended_career = sorted_careers[0][0]
+
+    career_suitability_score = sorted_careers[0][1]
+
+    alternative_career = sorted_careers[1][0]
+
+
+    # ==========================================
+    # Display Placement Prediction
+    # ==========================================
+
+    st.subheader("📊 Placement Prediction")
+
+    st.write(
+        f"**Placement Status:** {placement_status}"
+    )
+
+    st.write(
+        f"**Placement Probability:** "
+        f"{placement_probability:.2f}%"
+    )
+
+
+    # ==========================================
+    # Display Career Recommendation
+    # ==========================================
+
+    st.subheader("🎯 Career Recommendation")
+
+    st.write(
+        f"**Recommended Career:** "
+        f"{recommended_career}"
+    )
+
+    st.write(
+        f"**Career Suitability Score:** "
+        f"{career_suitability_score:.2f}"
+    )
+
+    st.write(
+        f"**Alternative Career:** "
+        f"{alternative_career}"
+    )
+
+
+    # ==========================================
+    # MySQL Database Connection
+    # ==========================================
+
+    connection = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="Shaikh@#12",
+        database="placement_career_db"
+    )
+
+    cursor = connection.cursor()
+
+
+    # ==========================================
+    # Store Result in MySQL
+    # ==========================================
+
+    insert_query = """
+    INSERT INTO students (
+        student_name,
+        branch,
+        college_tier,
+        cgpa,
+        backlogs,
+        coding_skills,
+        dsa_score,
+        aptitude_score,
+        communication_skills,
+        ml_knowledge,
+        system_design,
+        internships,
+        projects_count,
+        certifications,
+        hackathons,
+        open_source_contributions,
+        extracurriculars,
+        placement_status,
+        placement_probability,
+        recommended_career,
+        career_suitability_score,
+        alternative_career
+    )
+    VALUES (
+        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
+        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+    )
+    """
+
+    placement_status_db = int(prediction[0])
+
+    student_record = (
+        student_name,
+        branch,
+        college_tier,
+        cgpa,
+        backlogs,
+        coding_skills,
+        dsa_score,
+        aptitude_score,
+        communication_skills,
+        ml_knowledge,
+        system_design,
+        internships,
+        projects_count,
+        certifications,
+        hackathons,
+        open_source_contributions,
+        extracurriculars,
+        placement_status_db,
+        placement_probability,
+        recommended_career,
+        career_suitability_score,
+        alternative_career
+    )
+
+    cursor.execute(
+        insert_query,
+        student_record
+    )
+
+    connection.commit()
+
+    cursor.close()
+    connection.close()
+
+
+    # ==========================================
+    # Success Message
+    # ==========================================
+
+    st.success(
+        "✅ Prediction completed and student result "
+        "stored successfully!"
+    )
