@@ -60,27 +60,17 @@ backlogs = st.number_input(
 )
 
 
+
 # ==========================================
-# Technical & Skill Details
+# Technical & Branch-Specific Skill Details
 # ==========================================
 
 st.subheader("💻 Technical & Skill Details")
 
-coding_skills = st.slider(
-    "Coding Skills",
-    min_value=0.0,
-    max_value=10.0,
-    value=5.0,
-    step=0.5
-)
 
-dsa_score = st.slider(
-    "DSA Score",
-    min_value=0.0,
-    max_value=10.0,
-    value=5.0,
-    step=0.5
-)
+# ==========================================
+# Common Skills
+# ==========================================
 
 aptitude_score = st.slider(
     "Aptitude Score",
@@ -98,21 +88,214 @@ communication_skills = st.slider(
     step=0.5
 )
 
-ml_knowledge = st.slider(
-    "Machine Learning Knowledge",
-    min_value=0.0,
-    max_value=10.0,
-    value=5.0,
-    step=0.5
-)
 
-system_design = st.slider(
-    "System Design Knowledge",
-    min_value=0.0,
-    max_value=10.0,
-    value=5.0,
-    step=0.5
-)
+# ==========================================
+# Branch-Specific Skills
+# ==========================================
+
+if branch == "CSE":
+
+    st.markdown("### 💻 Computer Science Skills")
+
+    coding_skills = st.slider(
+        "Coding Skills",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    dsa_score = st.slider(
+        "DSA Score",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    ml_knowledge = st.slider(
+        "Machine Learning Knowledge",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    system_design = st.slider(
+        "System Design Knowledge",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+
+elif branch == "IT":
+
+    st.markdown("### 🖥️ Information Technology Skills")
+
+    coding_skills = st.slider(
+        "Coding Skills",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    dsa_score = st.slider(
+        "DSA Score",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    database_knowledge = st.slider(
+        "Database Knowledge",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    cloud_knowledge = st.slider(
+        "Cloud Computing Knowledge",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    ml_knowledge = 5.0
+    system_design = 5.0
+
+
+elif branch == "ECE":
+
+    st.markdown("### 📡 Electronics & Communication Skills")
+
+    embedded_systems = st.slider(
+        "Embedded Systems",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    vlsi = st.slider(
+        "VLSI Knowledge",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    electronics = st.slider(
+        "Electronics Knowledge",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    communication_systems = st.slider(
+        "Communication Systems",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    coding_skills = 5.0
+    dsa_score = 5.0
+    ml_knowledge = 5.0
+    system_design = 5.0
+
+
+elif branch == "EE":
+
+    st.markdown("### ⚡ Electrical Engineering Skills")
+
+    electrical_systems = st.slider(
+        "Electrical Systems",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    power_systems = st.slider(
+        "Power Systems",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    control_systems = st.slider(
+        "Control Systems",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    electrical_design = st.slider(
+        "Electrical Design",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    coding_skills = 5.0
+    dsa_score = 5.0
+    ml_knowledge = 5.0
+    system_design = 5.0
+
+
+elif branch == "ME":
+
+    st.markdown("### ⚙️ Mechanical Engineering Skills")
+
+    cad_design = st.slider(
+        "CAD Design",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    mechanical_design = st.slider(
+        "Mechanical Design",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    manufacturing = st.slider(
+        "Manufacturing Knowledge",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    production = st.slider(
+        "Production Knowledge",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    coding_skills = 5.0
+    dsa_score = 5.0
+    ml_knowledge = 5.0
+    system_design = 5.0
+
+
+elif branch == "CE":
+
+    st.markdown("### 🏗️ Civil Engineering Skills")
+
+    structural_design = st.slider(
+        "Structural Design",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    cad_design = st.slider(
+        "CAD / AutoCAD",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    construction = st.slider(
+        "Construction Knowledge",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    surveying = st.slider(
+        "Surveying",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    coding_skills = 5.0
+    dsa_score = 5.0
+    ml_knowledge = 5.0
+    system_design = 5.0
+
+
+elif branch == "Chemical":
+
+    st.markdown("### 🧪 Chemical Engineering Skills")
+
+    chemical_processes = st.slider(
+        "Chemical Processes",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    process_design = st.slider(
+        "Process Design",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    plant_operations = st.slider(
+        "Plant Operations",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    quality_control = st.slider(
+        "Quality Control",
+        0.0, 10.0, 5.0, 0.5
+    )
+
+    coding_skills = 5.0
+    dsa_score = 5.0
+    ml_knowledge = 5.0
+    system_design = 5.0
+
+
 
 
 # ==========================================
