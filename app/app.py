@@ -60,7 +60,6 @@ backlogs = st.number_input(
 )
 
 
-
 # ==========================================
 # Technical & Branch-Specific Skill Details
 # ==========================================
@@ -296,8 +295,6 @@ elif branch == "Chemical":
     system_design = 5.0
 
 
-
-
 # ==========================================
 # Experience & Activities
 # ==========================================
@@ -446,6 +443,7 @@ if st.button("🎯 Predict & Recommend"):
         best_model.predict_proba(student_encoded)[0][1] * 100
     )
 
+
     # ==========================================
     # Branch-Aware Career Recommendation
     # ==========================================
@@ -502,185 +500,287 @@ if st.button("🎯 Predict & Recommend"):
         ]
     }
 
-    career_weights = {
 
-        "Software Developer": {
-            "coding_skills": 0.30,
-            "dsa_score": 0.25,
-            "projects_count": 0.20,
-            "internships": 0.10,
-            "cgpa": 0.10,
-            "communication_skills": 0.05
+    # ==========================================
+    # Branch-Aware Career Weights
+    # ==========================================
+
+    branch_career_weights = {
+
+        "CSE": {
+
+            "Software Developer": {
+                "coding_skills": 0.30,
+                "dsa_score": 0.25,
+                "projects_count": 0.20,
+                "internships": 0.10,
+                "cgpa": 0.10,
+                "communication_skills": 0.05
+            },
+
+            "Data Analyst": {
+                "aptitude_score": 0.20,
+                "communication_skills": 0.20,
+                "coding_skills": 0.15,
+                "projects_count": 0.15,
+                "internships": 0.10,
+                "cgpa": 0.20
+            },
+
+            "Data Scientist": {
+                "ml_knowledge": 0.30,
+                "coding_skills": 0.20,
+                "aptitude_score": 0.15,
+                "projects_count": 0.15,
+                "cgpa": 0.10,
+                "internships": 0.10
+            },
+
+            "Machine Learning Engineer": {
+                "ml_knowledge": 0.30,
+                "coding_skills": 0.25,
+                "dsa_score": 0.15,
+                "projects_count": 0.15,
+                "internships": 0.10,
+                "cgpa": 0.05
+            }
         },
 
-        "Data Analyst": {
-            "aptitude_score": 0.30,
-            "communication_skills": 0.25,
-            "coding_skills": 0.10,
-            "projects_count": 0.15,
-            "internships": 0.10,
-            "cgpa": 0.10
+        "IT": {
+
+            "Software Developer": {
+                "coding_skills": 0.25,
+                "dsa_score": 0.20,
+                "database_knowledge": 0.15,
+                "cloud_knowledge": 0.15,
+                "projects_count": 0.15,
+                "internships": 0.05,
+                "cgpa": 0.05
+            },
+
+            "Data Analyst": {
+                "database_knowledge": 0.20,
+                "aptitude_score": 0.20,
+                "communication_skills": 0.15,
+                "coding_skills": 0.10,
+                "projects_count": 0.15,
+                "internships": 0.10,
+                "cgpa": 0.10
+            },
+
+            "Data Scientist": {
+                "coding_skills": 0.20,
+                "database_knowledge": 0.15,
+                "aptitude_score": 0.15,
+                "projects_count": 0.20,
+                "internships": 0.10,
+                "cgpa": 0.20
+            },
+
+            "Machine Learning Engineer": {
+                "coding_skills": 0.25,
+                "dsa_score": 0.15,
+                "cloud_knowledge": 0.15,
+                "projects_count": 0.20,
+                "internships": 0.10,
+                "cgpa": 0.15
+            }
         },
 
-        "Data Scientist": {
-            "ml_knowledge": 0.30,
-            "coding_skills": 0.20,
-            "aptitude_score": 0.15,
-            "projects_count": 0.15,
-            "cgpa": 0.10,
-            "internships": 0.10
+        "ECE": {
+
+            "Embedded Systems Engineer": {
+                "embedded_systems": 0.30,
+                "electronics": 0.20,
+                "communication_systems": 0.15,
+                "projects_count": 0.15,
+                "internships": 0.10,
+                "cgpa": 0.10
+            },
+
+            "VLSI Engineer": {
+                "vlsi": 0.35,
+                "electronics": 0.25,
+                "projects_count": 0.15,
+                "internships": 0.10,
+                "cgpa": 0.10,
+                "certifications": 0.05
+            },
+
+            "Electronics Engineer": {
+                "electronics": 0.35,
+                "communication_systems": 0.20,
+                "embedded_systems": 0.15,
+                "projects_count": 0.15,
+                "internships": 0.10,
+                "cgpa": 0.05
+            },
+
+            "Software Developer": {
+                "coding_skills": 0.30,
+                "dsa_score": 0.20,
+                "projects_count": 0.20,
+                "internships": 0.10,
+                "cgpa": 0.10,
+                "communication_skills": 0.10
+            }
         },
 
-        "Machine Learning Engineer": {
-            "ml_knowledge": 0.30,
-            "coding_skills": 0.25,
-            "dsa_score": 0.15,
-            "projects_count": 0.15,
-            "internships": 0.10,
-            "cgpa": 0.05
+        "EE": {
+
+            "Electrical Engineer": {
+                "electrical_systems": 0.35,
+                "electrical_design": 0.20,
+                "projects_count": 0.20,
+                "internships": 0.10,
+                "cgpa": 0.10,
+                "certifications": 0.05
+            },
+
+            "Power Systems Engineer": {
+                "power_systems": 0.35,
+                "electrical_systems": 0.25,
+                "projects_count": 0.15,
+                "internships": 0.10,
+                "cgpa": 0.10,
+                "certifications": 0.05
+            },
+
+            "Embedded Systems Engineer": {
+                "control_systems": 0.20,
+                "electrical_systems": 0.25,
+                "electrical_design": 0.20,
+                "projects_count": 0.15,
+                "internships": 0.10,
+                "cgpa": 0.10
+            },
+
+            "Control Systems Engineer": {
+                "control_systems": 0.35,
+                "electrical_systems": 0.20,
+                "electrical_design": 0.20,
+                "projects_count": 0.15,
+                "internships": 0.05,
+                "cgpa": 0.05
+            }
         },
 
-        "Embedded Systems Engineer": {
-            "coding_skills": 0.25,
-            "dsa_score": 0.15,
-            "projects_count": 0.20,
-            "internships": 0.15,
-            "cgpa": 0.15,
-            "communication_skills": 0.10
+        "ME": {
+
+            "Mechanical Design Engineer": {
+                "mechanical_design": 0.35,
+                "cad_design": 0.30,
+                "projects_count": 0.15,
+                "internships": 0.10,
+                "cgpa": 0.10
+            },
+
+            "Manufacturing Engineer": {
+                "manufacturing": 0.35,
+                "mechanical_design": 0.20,
+                "projects_count": 0.15,
+                "internships": 0.20,
+                "cgpa": 0.10
+            },
+
+            "CAD Engineer": {
+                "cad_design": 0.40,
+                "mechanical_design": 0.25,
+                "projects_count": 0.15,
+                "certifications": 0.10,
+                "cgpa": 0.10
+            },
+
+            "Production Engineer": {
+                "production": 0.35,
+                "manufacturing": 0.25,
+                "projects_count": 0.15,
+                "internships": 0.15,
+                "cgpa": 0.10
+            }
         },
 
-        "VLSI Engineer": {
-            "dsa_score": 0.10,
-            "projects_count": 0.25,
-            "internships": 0.20,
-            "cgpa": 0.25,
-            "aptitude_score": 0.10,
-            "certifications": 0.10
+        "CE": {
+
+            "Civil Engineer": {
+                "construction": 0.30,
+                "surveying": 0.20,
+                "structural_design": 0.15,
+                "projects_count": 0.15,
+                "internships": 0.10,
+                "cgpa": 0.10
+            },
+
+            "Structural Engineer": {
+                "structural_design": 0.40,
+                "cad_design": 0.20,
+                "projects_count": 0.15,
+                "internships": 0.10,
+                "cgpa": 0.10,
+                "certifications": 0.05
+            },
+
+            "Construction Engineer": {
+                "construction": 0.40,
+                "surveying": 0.15,
+                "projects_count": 0.15,
+                "internships": 0.20,
+                "cgpa": 0.10
+            },
+
+            "Project Engineer": {
+                "construction": 0.25,
+                "projects_count": 0.20,
+                "internships": 0.20,
+                "communication_skills": 0.15,
+                "cgpa": 0.10,
+                "surveying": 0.10
+            }
         },
 
-        "Electronics Engineer": {
-            "projects_count": 0.25,
-            "internships": 0.20,
-            "cgpa": 0.20,
-            "aptitude_score": 0.15,
-            "communication_skills": 0.10,
-            "certifications": 0.10
-        },
+        "Chemical": {
 
-        "Electrical Engineer": {
-            "projects_count": 0.25,
-            "internships": 0.20,
-            "cgpa": 0.25,
-            "aptitude_score": 0.15,
-            "certifications": 0.15
-        },
+            "Chemical Engineer": {
+                "chemical_processes": 0.35,
+                "process_design": 0.25,
+                "projects_count": 0.15,
+                "internships": 0.10,
+                "cgpa": 0.10,
+                "certifications": 0.05
+            },
 
-        "Power Systems Engineer": {
-            "projects_count": 0.25,
-            "internships": 0.25,
-            "cgpa": 0.25,
-            "aptitude_score": 0.15,
-            "certifications": 0.10
-        },
+            "Process Engineer": {
+                "process_design": 0.35,
+                "chemical_processes": 0.25,
+                "plant_operations": 0.20,
+                "projects_count": 0.10,
+                "internships": 0.10
+            },
 
-        "Control Systems Engineer": {
-            "projects_count": 0.25,
-            "internships": 0.20,
-            "cgpa": 0.25,
-            "aptitude_score": 0.15,
-            "certifications": 0.15
-        },
+            "Production Engineer": {
+                "plant_operations": 0.30,
+                "chemical_processes": 0.25,
+                "process_design": 0.20,
+                "projects_count": 0.10,
+                "internships": 0.10,
+                "cgpa": 0.05
+            },
 
-        "Mechanical Design Engineer": {
-            "projects_count": 0.25,
-            "internships": 0.20,
-            "cgpa": 0.25,
-            "aptitude_score": 0.15,
-            "certifications": 0.15
-        },
-
-        "Manufacturing Engineer": {
-            "projects_count": 0.25,
-            "internships": 0.25,
-            "cgpa": 0.20,
-            "aptitude_score": 0.15,
-            "certifications": 0.15
-        },
-
-        "CAD Engineer": {
-            "projects_count": 0.30,
-            "internships": 0.20,
-            "cgpa": 0.20,
-            "certifications": 0.20,
-            "aptitude_score": 0.10
-        },
-
-        "Production Engineer": {
-            "projects_count": 0.25,
-            "internships": 0.25,
-            "cgpa": 0.20,
-            "aptitude_score": 0.15,
-            "communication_skills": 0.15
-        },
-
-        "Civil Engineer": {
-            "projects_count": 0.25,
-            "internships": 0.25,
-            "cgpa": 0.25,
-            "aptitude_score": 0.15,
-            "communication_skills": 0.10
-        },
-
-        "Structural Engineer": {
-            "projects_count": 0.25,
-            "internships": 0.20,
-            "cgpa": 0.25,
-            "aptitude_score": 0.15,
-            "certifications": 0.15
-        },
-
-        "Construction Engineer": {
-            "projects_count": 0.25,
-            "internships": 0.30,
-            "cgpa": 0.20,
-            "aptitude_score": 0.15,
-            "communication_skills": 0.10
-        },
-
-        "Project Engineer": {
-            "projects_count": 0.25,
-            "internships": 0.25,
-            "communication_skills": 0.20,
-            "cgpa": 0.20,
-            "aptitude_score": 0.10
-        },
-
-        "Chemical Engineer": {
-            "projects_count": 0.25,
-            "internships": 0.25,
-            "cgpa": 0.25,
-            "aptitude_score": 0.15,
-            "certifications": 0.10
-        },
-
-        "Process Engineer": {
-            "projects_count": 0.25,
-            "internships": 0.25,
-            "cgpa": 0.20,
-            "aptitude_score": 0.15,
-            "certifications": 0.15
-        },
-
-        "Quality Engineer": {
-            "projects_count": 0.20,
-            "internships": 0.20,
-            "cgpa": 0.20,
-            "aptitude_score": 0.20,
-            "communication_skills": 0.20
+            "Quality Engineer": {
+                "quality_control": 0.35,
+                "chemical_processes": 0.20,
+                "communication_skills": 0.15,
+                "projects_count": 0.10,
+                "internships": 0.10,
+                "certifications": 0.10
+            }
         }
     }
 
-    # Normalize aptitude score to 0-10 scale
+
+    # ==========================================
+    # Career Features
+    # ==========================================
 
     normalized_aptitude_score = aptitude_score / 10
 
@@ -688,13 +788,146 @@ if st.button("🎯 Predict & Recommend"):
         "cgpa": cgpa,
         "aptitude_score": normalized_aptitude_score,
         "communication_skills": communication_skills,
+
         "coding_skills": coding_skills,
         "dsa_score": dsa_score,
         "ml_knowledge": ml_knowledge,
+
+        "database_knowledge": (
+            database_knowledge
+            if branch == "IT"
+            else 0
+        ),
+
+        "cloud_knowledge": (
+            cloud_knowledge
+            if branch == "IT"
+            else 0
+        ),
+
+        "embedded_systems": (
+            embedded_systems
+            if branch == "ECE"
+            else 0
+        ),
+
+        "vlsi": (
+            vlsi
+            if branch == "ECE"
+            else 0
+        ),
+
+        "electronics": (
+            electronics
+            if branch == "ECE"
+            else 0
+        ),
+
+        "communication_systems": (
+            communication_systems
+            if branch == "ECE"
+            else 0
+        ),
+
+        "electrical_systems": (
+            electrical_systems
+            if branch == "EE"
+            else 0
+        ),
+
+        "power_systems": (
+            power_systems
+            if branch == "EE"
+            else 0
+        ),
+
+        "control_systems": (
+            control_systems
+            if branch == "EE"
+            else 0
+        ),
+
+        "electrical_design": (
+            electrical_design
+            if branch == "EE"
+            else 0
+        ),
+
+        "cad_design": (
+            cad_design
+            if branch in ["ME", "CE"]
+            else 0
+        ),
+
+        "mechanical_design": (
+            mechanical_design
+            if branch == "ME"
+            else 0
+        ),
+
+        "manufacturing": (
+            manufacturing
+            if branch == "ME"
+            else 0
+        ),
+
+        "production": (
+            production
+            if branch == "ME"
+            else 0
+        ),
+
+        "structural_design": (
+            structural_design
+            if branch == "CE"
+            else 0
+        ),
+
+        "construction": (
+            construction
+            if branch == "CE"
+            else 0
+        ),
+
+        "surveying": (
+            surveying
+            if branch == "CE"
+            else 0
+        ),
+
+        "chemical_processes": (
+            chemical_processes
+            if branch == "Chemical"
+            else 0
+        ),
+
+        "process_design": (
+            process_design
+            if branch == "Chemical"
+            else 0
+        ),
+
+        "plant_operations": (
+            plant_operations
+            if branch == "Chemical"
+            else 0
+        ),
+
+        "quality_control": (
+            quality_control
+            if branch == "Chemical"
+            else 0
+        ),
+
         "projects_count": projects_count,
         "internships": internships,
         "certifications": certifications
     }
+
+
+    # ==========================================
+    # Calculate Career Scores
+    # ==========================================
 
     available_careers = branch_career_pools[branch]
 
@@ -704,10 +937,15 @@ if st.button("🎯 Predict & Recommend"):
 
         score = 0
 
-        for feature, weight in career_weights[career].items():
+        for feature, weight in branch_career_weights[branch][career].items():
             score += career_features[feature] * weight
 
         career_scores[career] = score
+
+
+    # ==========================================
+    # Rank Careers
+    # ==========================================
 
     sorted_careers = sorted(
         career_scores.items(),
@@ -716,9 +954,7 @@ if st.button("🎯 Predict & Recommend"):
     )
 
     recommended_career = sorted_careers[0][0]
-
     career_suitability_score = sorted_careers[0][1]
-
     alternative_career = sorted_careers[1][0]
 
 
@@ -761,7 +997,300 @@ if st.button("🎯 Predict & Recommend"):
 
 
     # ==========================================
-    # MySQL Database Connection
+    # Prepare Branch-Specific Database Values
+    # ==========================================
+
+    database_knowledge_db = (
+        database_knowledge
+        if branch == "IT"
+        else 0
+    )
+
+    cloud_knowledge_db = (
+        cloud_knowledge
+        if branch == "IT"
+        else 0
+    )
+
+    embedded_systems_db = (
+        embedded_systems
+        if branch == "ECE"
+        else 0
+    )
+
+    vlsi_db = (
+        vlsi
+        if branch == "ECE"
+        else 0
+    )
+
+    electronics_db = (
+        electronics
+        if branch == "ECE"
+        else 0
+    )
+
+    communication_systems_db = (
+        communication_systems
+        if branch == "ECE"
+        else 0
+    )
+
+    electrical_systems_db = (
+        electrical_systems
+        if branch == "EE"
+        else 0
+    )
+
+    power_systems_db = (
+        power_systems
+        if branch == "EE"
+        else 0
+    )
+
+    control_systems_db = (
+        control_systems
+        if branch == "EE"
+        else 0
+    )
+
+    electrical_design_db = (
+        electrical_design
+        if branch == "EE"
+        else 0
+    )
+
+    cad_design_db = (
+        cad_design
+        if branch in ["ME", "CE"]
+        else 0
+    )
+
+    mechanical_design_db = (
+        mechanical_design
+        if branch == "ME"
+        else 0
+    )
+
+    manufacturing_db = (
+        manufacturing
+        if branch == "ME"
+        else 0
+    )
+
+    production_db = (
+        production
+        if branch == "ME"
+        else 0
+    )
+
+    structural_design_db = (
+        structural_design
+        if branch == "CE"
+        else 0
+    )
+
+    construction_db = (
+        construction
+        if branch == "CE"
+        else 0
+    )
+
+    surveying_db = (
+        surveying
+        if branch == "CE"
+        else 0
+    )
+
+    chemical_processes_db = (
+        chemical_processes
+        if branch == "Chemical"
+        else 0
+    )
+
+    process_design_db = (
+        process_design
+        if branch == "Chemical"
+        else 0
+    )
+
+    plant_operations_db = (
+        plant_operations
+        if branch == "Chemical"
+        else 0
+    )
+
+    quality_control_db = (
+        quality_control
+        if branch == "Chemical"
+        else 0
+    )
+
+
+    # ==========================================
+    # Placement Status for Database
+    # ==========================================
+
+    placement_status_db = int(prediction[0])
+
+
+    # ==========================================
+    # Prepare Complete Student Record
+    # ==========================================
+
+    student_record = (
+        student_name,
+        branch,
+        college_tier,
+        cgpa,
+        backlogs,
+
+        coding_skills,
+        dsa_score,
+        aptitude_score,
+        communication_skills,
+        ml_knowledge,
+        system_design,
+
+        internships,
+        projects_count,
+        certifications,
+        hackathons,
+        open_source_contributions,
+        extracurriculars,
+
+        technical_skill_score,
+        has_backlog,
+        experience_score,
+        technical_skill_gap,
+
+        placement_status_db,
+        placement_probability,
+        recommended_career,
+        career_suitability_score,
+        alternative_career,
+
+        database_knowledge_db,
+        cloud_knowledge_db,
+
+        embedded_systems_db,
+        vlsi_db,
+        electronics_db,
+        communication_systems_db,
+
+        electrical_systems_db,
+        power_systems_db,
+        control_systems_db,
+        electrical_design_db,
+
+        cad_design_db,
+        mechanical_design_db,
+        manufacturing_db,
+        production_db,
+
+        structural_design_db,
+        construction_db,
+        surveying_db,
+
+        chemical_processes_db,
+        process_design_db,
+        plant_operations_db,
+        quality_control_db
+    )
+
+
+    # ==========================================
+    # MySQL Insert Query
+    # ==========================================
+
+    insert_query = """
+    INSERT INTO students (
+        student_name,
+        branch,
+        college_tier,
+        cgpa,
+        backlogs,
+
+        coding_skills,
+        dsa_score,
+        aptitude_score,
+        communication_skills,
+        ml_knowledge,
+        system_design,
+
+        internships,
+        projects_count,
+        certifications,
+        hackathons,
+        open_source_contributions,
+        extracurriculars,
+
+        technical_skill_score,
+        has_backlog,
+        experience_score,
+        technical_skill_gap,
+
+        placement_status,
+        placement_probability,
+        recommended_career,
+        career_suitability_score,
+        alternative_career,
+
+        database_knowledge,
+        cloud_knowledge,
+
+        embedded_systems,
+        vlsi,
+        electronics,
+        communication_systems,
+
+        electrical_systems,
+        power_systems,
+        control_systems,
+        electrical_design,
+
+        cad_design,
+        mechanical_design,
+        manufacturing,
+        production,
+
+        structural_design,
+        construction,
+        surveying,
+
+        chemical_processes,
+        process_design,
+        plant_operations,
+        quality_control
+    )
+    VALUES (
+        %s, %s, %s, %s, %s,
+
+        %s, %s, %s, %s, %s, %s,
+
+        %s, %s, %s, %s, %s, %s,
+
+        %s, %s, %s, %s,
+
+        %s, %s, %s, %s, %s,
+
+        %s, %s,
+
+        %s, %s, %s, %s,
+
+        %s, %s, %s, %s,
+
+        %s, %s, %s, %s,
+
+        %s, %s, %s,
+
+        %s, %s, %s, %s
+    )
+    """
+
+
+    # ==========================================
+    # Connect to MySQL
     # ==========================================
 
     connection = mysql.connector.connect(
@@ -775,66 +1304,8 @@ if st.button("🎯 Predict & Recommend"):
 
 
     # ==========================================
-    # Store Result in MySQL
+    # Insert Complete Student Record
     # ==========================================
-
-    insert_query = """
-    INSERT INTO students (
-        student_name,
-        branch,
-        college_tier,
-        cgpa,
-        backlogs,
-        coding_skills,
-        dsa_score,
-        aptitude_score,
-        communication_skills,
-        ml_knowledge,
-        system_design,
-        internships,
-        projects_count,
-        certifications,
-        hackathons,
-        open_source_contributions,
-        extracurriculars,
-        placement_status,
-        placement_probability,
-        recommended_career,
-        career_suitability_score,
-        alternative_career
-    )
-    VALUES (
-        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
-        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
-    )
-    """
-
-    placement_status_db = int(prediction[0])
-
-    student_record = (
-        student_name,
-        branch,
-        college_tier,
-        cgpa,
-        backlogs,
-        coding_skills,
-        dsa_score,
-        aptitude_score,
-        communication_skills,
-        ml_knowledge,
-        system_design,
-        internships,
-        projects_count,
-        certifications,
-        hackathons,
-        open_source_contributions,
-        extracurriculars,
-        placement_status_db,
-        placement_probability,
-        recommended_career,
-        career_suitability_score,
-        alternative_career
-    )
 
     cursor.execute(
         insert_query,
@@ -842,6 +1313,11 @@ if st.button("🎯 Predict & Recommend"):
     )
 
     connection.commit()
+
+
+    # ==========================================
+    # Close Database Connection
+    # ==========================================
 
     cursor.close()
     connection.close()
