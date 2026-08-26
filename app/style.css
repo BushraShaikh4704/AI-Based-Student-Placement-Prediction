@@ -1,0 +1,39 @@
+.main-title {
+    font-size: 50px;
+    font-weight: 700;
+    color: #4F46E5;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: #666666;
+    margin-bottom: 40px;
+}
+
+.hero-card {
+    background: linear-gradient(135deg, #4F46E5, #7C3AED);
+    padding: 40px;
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero-card h1 {
+    color: white;
+    font-size: 42px;
+}
+
+.hero-card p {
+    font-size: 18px;
+}
+
+.section-title {
+    font-size: 30px;
+    font-weight: 600;
+    color: #4F46E5;
+    margin-top: 20px;
+}
