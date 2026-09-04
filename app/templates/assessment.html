@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Student Assessment</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <h1>🎓 CareerAI</h1>
+
+        <p>Placement Predictor</p>
+
+        <hr>
+
+        <a href="/">
+            <button>🏠 Dashboard</button>
+        </a>
+
+        <a href="/assessment">
+            <button class="active-btn">
+                📋 Student Assessment
+            </button>
+        </a>
+
+        <button>📈 Prediction Result</button>
+
+        <button>🎯 Career Recommendation</button>
+
+        <button>📊 Skill Analysis</button>
+
+        <button>🕒 Prediction History</button>
+
+    </aside>
+
+    <!-- Main Content -->
+
+    <main class="content">
+
+        <section class="hero">
+
+            <h1>📋 Student Assessment</h1>
+
+            <p>
+                Provide accurate information
+                to get the best placement prediction
+            </p>
+
+        </section>
+
+        <form action="/predict" method="POST">
+
+            <!-- Basic Information -->
+
+            <section class="card">
+
+                <h2>👤 Basic Information</h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group full-width">
+                        <label>Full Name</label>
+                        <input type="text"
+                               name="student_name"
+                               value="Not Provided"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Branch</label>
+
+                        <select name="branch" id="branch">
+
+                            <option value="CSE">CSE</option>
+                            <option value="IT">IT</option>
+                            <option value="ECE">ECE</option>
+                            <option value="EE">EE</option>
+                            <option value="ME">ME</option>
+                            <option value="CE">CE</option>
+                            <option value="Chemical">Chemical</option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>College Tier</label>
+
+                        <select name="college_tier">
+
+                            <option value="Tier 1">Tier 1</option>
+                            <option value="Tier 2">Tier 2</option>
+                            <option value="Tier 3">Tier 3</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>CGPA</label>
+
+                        <input type="number"
+                               step="0.01"
+                               min="0"
+                               max="10"
+                               value="8.50"
+                               name="cgpa"
+                               required>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Backlogs</label>
+
+                        <input type="number"
+                               min="0"
+                               name="backlogs"
+                               value="0"
+                               required>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Core Skills -->
+
+<section class="card">
+
+    <h2>🎯 Core Skills</h2>
+
+    <div class="form-grid">
+
+        <div class="form-group">
+            <label>Aptitude Score</label>
+            <input type="range"
+                   min="0"
+                   max="10"
+                   step="0.1"
+                   value="5.0"
+                   name="aptitude_score">
+        </div>
+
+        <div class="form-group">
+            <label>Communication Skills</label>
+            <input type="range"
+                   min="0"
+                   max="10"
+                   step="0.1"
+                   value="5.0"
+                   name="communication_skills">
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Branch Specific Skills -->
+
+<section class="card">
+
+    <h2>💻 Branch Specific Skills</h2>
+
+    <!-- CSE -->
+
+    <div id="cse-skills">
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Coding Skills</label>
+                <input type="range" min="0" max="10" step="0.1"
+                       value="5" name="coding_skills">
+            </div>
+
+            <div class="form-group">
+                <label>DSA Score</label>
+                <input type="range" min="0" max="10" step="0.1"
+                       value="5" name="dsa_score">
+            </div>
+
+            <div class="form-group">
+                <label>ML Knowledge</label>
+                <input type="range" min="0" max="10" step="0.1"
+                       value="5" name="ml_knowledge">
+            </div>
+
+            <div class="form-group">
+                <label>System Design</label>
+                <input type="range" min="0" max="10" step="0.1"
+                       value="5" name="system_design">
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- IT -->
+
+    <div id="it-skills" style="display:none;">
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Database Knowledge</label>
+                <input type="range" min="0" max="10" step="0.1"
+                       value="5" name="database_knowledge">
+            </div>
+
+            <div class="form-group">
+                <label>Cloud Knowledge</label>
+                <input type="range" min="0" max="10" step="0.1"
+                       value="5" name="cloud_knowledge">
+            </div>
+
+            <div class="form-group">
+                <label>Coding Skills</label>
+                <input type="range" min="0" max="10" step="0.1"
+                       value="5" name="coding_skills">
+            </div>
+
+            <div class="form-group">
+                <label>DSA Score</label>
+                <input type="range" min="0" max="10" step="0.1"
+                       value="5" name="dsa_score">
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ECE -->
+
+    <div id="ece-skills" style="display:none;">
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Embedded Systems</label>
+                <input type="range" min="0" max="10" step="0.1"
+                       value="5" name="embedded_systems">
+            </div>
+
+            <div class="form-group">
+                <label>VLSI</label>
+                <input type="range" min="0" max="10" step="0.1"
+                       value="5" name="vlsi">
+            </div>
+
+            <div class="form-group">
+                <label>Electronics</label>
+                <input type="range" min="0" max="10" step="0.1"
+                       value="5" name="electronics">
+            </div>
+
+            <div class="form-group">
+                <label>Communication Systems</label>
+                <input type="range" min="0" max="10" step="0.1"
+                       value="5" name="communication_systems">
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- EE -->
+
+    <div id="ee-skills" style="display:none;">
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Electrical Systems</label>
+                <input type="range" min="0" max="10" step="0.1"
+                       value="5" name="electrical_systems">
+            </div>
+
+            <div class="form-group">
+                <label>Power Systems</label>
+                <input type="range" min="0" max="10" step="0.1"
+                       value="5" name="power_systems">
+            </div>
+
+            <div class="form-group">
+                <label>Control Systems</label>
+                <input type="range" min="0" max="10" step="0.1"
+                       value="5" name="control_systems">
+            </div>
+
+            <div class="form-group">
+                <label>Electrical Design</label>
+                <input type="range" min="0" max="10" step="0.1"
+                       value="5" name="electrical_design">
+            </div>
+
+        </div>
+
+    </div>
+    <!-- ME -->
+
+<div id="me-skills" style="display:none;">
+
+    <div class="form-grid">
+
+        <div class="form-group">
+            <label>CAD Design</label>
+            <input type="range" min="0" max="10" step="0.1"
+                   value="5" name="cad_design">
+        </div>
+
+        <div class="form-group">
+            <label>Mechanical Design</label>
+            <input type="range" min="0" max="10" step="0.1"
+                   value="5" name="mechanical_design">
+        </div>
+
+        <div class="form-group">
+            <label>Manufacturing</label>
+            <input type="range" min="0" max="10" step="0.1"
+                   value="5" name="manufacturing">
+        </div>
+
+        <div class="form-group">
+            <label>Production</label>
+            <input type="range" min="0" max="10" step="0.1"
+                   value="5" name="production">
+        </div>
+
+    </div>
+
+</div>
+
+<!-- CE -->
+
+<div id="ce-skills" style="display:none;">
+
+    <div class="form-grid">
+
+        <div class="form-group">
+            <label>Structural Design</label>
+            <input type="range" min="0" max="10" step="0.1"
+                   value="5" name="structural_design">
+        </div>
+
+        <div class="form-group">
+            <label>Construction</label>
+            <input type="range" min="0" max="10" step="0.1"
+                   value="5" name="construction">
+        </div>
+
+        <div class="form-group">
+            <label>Surveying</label>
+            <input type="range" min="0" max="10" step="0.1"
+                   value="5" name="surveying">
+        </div>
+
+        <div class="form-group">
+            <label>CAD Design</label>
+            <input type="range" min="0" max="10" step="0.1"
+                   value="5" name="cad_design">
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Chemical -->
+
+<div id="chemical-skills" style="display:none;">
+
+    <div class="form-grid">
+
+        <div class="form-group">
+            <label>Chemical Processes</label>
+            <input type="range" min="0" max="10" step="0.1"
+                   value="5" name="chemical_processes">
+        </div>
+
+        <div class="form-group">
+            <label>Process Design</label>
+            <input type="range" min="0" max="10" step="0.1"
+                   value="5" name="process_design">
+        </div>
+
+        <div class="form-group">
+            <label>Plant Operations</label>
+            <input type="range" min="0" max="10" step="0.1"
+                   value="5" name="plant_operations">
+        </div>
+
+        <div class="form-group">
+            <label>Quality Control</label>
+            <input type="range" min="0" max="10" step="0.1"
+                   value="5" name="quality_control">
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+            <!-- Experience -->
+
+            <section class="card">
+
+                <h2>🏆 Experience & Activities</h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Internships</label>
+                        <input type="number"
+                               min="0"
+                               value="0"
+                               name="internships">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Projects</label>
+                        <input type="number"
+                               min="0"
+                               value="0"
+                               name="projects_count">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Certifications</label>
+                        <input type="number"
+                               min="0"
+                               value="0"
+                               name="certifications">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Hackathons</label>
+                        <input type="number"
+                               min="0"
+                               value="0"
+                               name="hackathons">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Open Source</label>
+                        <input type="number"
+                               min="0"
+                               value="0"
+                               name="open_source_contributions">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Extracurriculars</label>
+                        <input type="number"
+                               min="0"
+                               value="0"
+                               name="extracurriculars">
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Submit -->
+
+            <section class="cta-section">
+
+    <div class="cta-content">
+
+        <div>
+
+            <h2>
+                Ready to get your placement prediction?
+            </h2>
+
+            <p>
+                Complete your assessment and let our AI
+                predict your placement potential and
+                recommend the best career path.
+            </p>
+
+        </div>
+
+        <button
+            type="submit"
+            class="cta-btn">
+
+            Predict Now →
+        </button>
+
+    </div>
+
+</section>
+
+        </form>
+
+    </main>
+
+</div>
+
+<script>
+
+const branchSelect = document.getElementById("branch");
+
+const sections = {
+    CSE: document.getElementById("cse-skills"),
+    IT: document.getElementById("it-skills"),
+    ECE: document.getElementById("ece-skills"),
+    EE: document.getElementById("ee-skills"),
+    ME: document.getElementById("me-skills"),
+    CE: document.getElementById("ce-skills"),
+    Chemical: document.getElementById("chemical-skills")
+};
+
+function updateSkills() {
+
+    Object.values(sections).forEach(section => {
+        section.style.display = "none";
+    });
+
+    sections[branchSelect.value].style.display = "block";
+}
+
+branchSelect.addEventListener("change", updateSkills);
+
+updateSkills();
+
+</script>
+
+</body>
+</html>

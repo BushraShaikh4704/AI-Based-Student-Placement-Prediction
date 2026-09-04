@@ -1,24 +1,309 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>CareerAI</title>
 
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='style.css') }}"
-    >
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
 <body>
 
-    <h1>CareerAI</h1>
+<div class="container">
 
-    <h2>
-        AI-Based Student Placement &
-        Career Recommendation System
-    </h2>
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <h1>🎓 CareerAI</h1>
+
+        <p>Placement Predictor</p>
+
+        <hr>
+
+        <button>🏠 Dashboard</button>
+
+        <button>📋 Student Assessment</button>
+
+        <button>📈 Prediction Result</button>
+
+        <button>🎯 Career Recommendation</button>
+
+        <button>📊 Skill Analysis</button>
+
+        <button>🕒 Prediction History</button>
+
+    </aside>
+
+    <!-- Main Content -->
+
+    <main class="content">
+
+        <!-- Hero -->
+
+        <section class="hero">
+
+            <h1>
+                AI-Based Student Placement &
+                Career Recommendation System
+            </h1>
+
+            <p>
+                Predict your placement potential and
+                discover your ideal career path
+            </p>
+
+        </section>
+
+        <!-- Profile -->
+
+        <section class="card">
+
+    <h2>👤 Student Profile Summary</h2>
+
+    <div class="profile-row">
+
+        <div class="profile-box">
+            <span>Name</span>
+            <h3>Bushra Shaikh</h3>
+        </div>
+
+        <div class="profile-box">
+            <span>Branch</span>
+            <h3>Computer Science</h3>
+        </div>
+
+        <div class="profile-box">
+            <span>College Tier</span>
+            <h3>Tier 2</h3>
+        </div>
+
+        <div class="profile-box">
+            <span>CGPA</span>
+            <h3>8.5</h3>
+        </div>
+
+        <div class="profile-box">
+            <span>Backlogs</span>
+            <h3>0</h3>
+        </div>
+
+    </div>
+
+</section>
+
+        <!-- Placement + Insights -->
+
+        <section class="dashboard-content">
+
+            <div class="placement-card">
+
+                <h2>📈 Placement Prediction Result</h2>
+
+                <div class="placement-layout">
+
+    <div class="circle-wrapper">
+
+        <div class="circle-progress">
+
+            <div class="circle-inner">
+
+                <h1>88.62%</h1>
+
+                <p>High Placement Potential</p>
+
+                <span>✅ PLACED</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="placement-details">
+
+        <h3>Placement Probability</h3>
+
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+
+        <p class="placement-message">
+            Excellent! You have a high probability of getting placed.
+        </p>
+
+    </div>
+
+</div>
+
+            </div>
+
+            <div class="insight-card">
+
+                <h2>💡 Quick Insights</h2>
+
+                <div class="insight-item">
+                    <span>Technical Skills</span>
+                    <strong>8.5/10</strong>
+                </div>
+
+                <div class="insight-item">
+                    <span>Experience Score</span>
+                    <strong>7.0/10</strong>
+                </div>
+
+                <div class="insight-item">
+                    <span>Communication</span>
+                    <strong>8.0/10</strong>
+                </div>
+
+                <div class="insight-item">
+                    <span>Overall Profile</span>
+                    <strong>7.8/10</strong>
+                </div>
+
+            </div>
+
+        </section>
+        
+        <!-- Career Recommendation -->
+
+<section class="dashboard-content">
+
+    <div class="career-card">
+
+        <h2>🎯 Career Recommendation</h2>
+
+        <div class="career-layout">
+
+            <div class="recommended-career">
+
+                <span>Recommended Career</span>
+
+                <h3>Machine Learning Engineer</h3>
+
+                <div class="career-score">
+                    8.4/10
+                </div>
+
+                <p class="career-match">
+                    ✅ High Match
+                </p>
+
+            </div>
+
+            <div class="alternative-careers">
+
+                <h4>Alternative Career Paths</h4>
+
+                <div class="alt-item">
+                    Data Scientist
+                    <strong>7.9/10</strong>
+                </div>
+
+                <div class="alt-item">
+                    Software Developer
+                    <strong>7.6/10</strong>
+                </div>
+
+                <div class="alt-item">
+                    Data Analyst
+                    <strong>7.4/10</strong>
+                </div>
+
+                <div class="alt-item">
+                    AI Engineer
+                    <strong>7.2/10</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div>
+
+        <div class="strength-card">
+
+            <h2>👍 Strengths</h2>
+
+            <ul>
+
+                <li>Strong Coding Skills</li>
+
+                <li>Good DSA Knowledge</li>
+
+                <li>Excellent ML Understanding</li>
+
+                <li>Good Project Experience</li>
+
+            </ul>
+
+        </div>
+
+        <div class="improve-card">
+
+            <h2>⚠ Areas To Improve</h2>
+
+            <ul>
+
+                <li>Communication Skills</li>
+
+                <li>System Design Knowledge</li>
+
+                <li>Hackathon Participation</li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+            <!-- Bottom CTA -->
+
+<section class="cta-section">
+
+    <div class="cta-content">
+
+        <div>
+
+            <h2>
+                Ready to get your personalized career assessment?
+            </h2>
+
+            <p>
+                Take a comprehensive assessment to get
+                more accurate recommendations.
+            </p>
+
+        </div>
+
+        <a href="/assessment">
+            <button class="cta-btn">
+                Take Assessment →
+            </button>
+        </a>
+
+    </div>
+
+</section>
+
+    </main>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 
