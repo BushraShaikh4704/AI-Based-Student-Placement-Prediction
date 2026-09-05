@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Prediction Result</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <h1>🎓 CareerAI</h1>
+
+        <p>Placement Predictor</p>
+
+        <hr>
+
+        <a href="/">
+            <button>🏠 Dashboard</button>
+        </a>
+
+        <a href="/assessment">
+            <button>📋 Student Assessment</button>
+        </a>
+
+        <a href="/prediction">
+            <button class="active-btn">📈 Prediction Result</button>
+        </a>
+
+        <a href="/career">
+            <button>🎯 Career Recommendation</button>
+        </a>
+
+        <a href="/skills">
+            <button>📊 Skill Analysis</button>
+        </a>
+
+        <a href="/history">
+            <button>🕒 Prediction History</button>
+        </a>
+
+    </aside>
+
+    <!-- Main Content -->
+
+    <main class="content">
+
+        <section class="hero">
+
+    <h1>📈 Placement Prediction Result</h1>
+
+    <p>
+        View your placement prediction outcome
+        and probability
+    </p>
+
+</section>
+
+<!-- ADD HERE -->
+
+{% if assessment_required %}
+
+<section class="cta-section">
+
+    <div class="cta-content">
+
+        <div>
+
+            <h2>
+                ⚠ Assessment Form Required
+            </h2>
+
+            <p>
+                Please complete the Student Assessment Form
+                before generating a placement prediction.
+            </p>
+
+        </div>
+
+        <a href="/assessment">
+
+            <button class="cta-btn">
+
+                Fill Assessment Form →
+
+            </button>
+
+        </a>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+{% if not assessment_required %}
+
+<section class="cta-section">
+
+    <div class="cta-content">
+
+        <div>
+
+            <h2>
+                Ready to predict your placement chances?
+            </h2>
+
+            <p>
+                Run the prediction model using
+                your assessment data.
+            </p>
+
+        </div>
+
+        <form action="/predict" method="POST">
+
+            <button class="cta-btn">
+
+                Predict Placement →
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+{% if placement_probability %}
+
+        <section class="success-card">
+
+    <div class="success-icon">
+        ✓
+    </div>
+
+    <div>
+
+        <h2>
+            Prediction Completed Successfully!
+        </h2>
+
+        <p>
+            Here is your placement prediction result
+            based on the assessment data.
+        </p>
+
+    </div>
+
+</section>
+
+    <section class="card prediction-card">
+
+    <div>
+
+        <h3>Placement Status</h3>
+
+        {% if placement_status == "Placed" %}
+
+        <h1 class="placed-status">
+            Placed
+        </h1>
+
+        <p>
+            Based on your current profile,
+            you are likely to get placed.
+        </p>
+
+        {% else %}
+
+        <h1 class="not-placed-status">
+            Not Placed
+        </h1>
+
+        <p>
+            Based on your current profile,
+            you are not likely to get placed.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+        <div>
+
+    <h3>
+        Placement Probability
+    </h3>
+
+    <h1>
+        {{ placement_probability }}%
+    </h1>
+
+    {% if placement_probability and placement_probability >= 75 %}
+
+    <span class="probability-badge high">
+        High Probability
+    </span>
+
+    {% elif placement_probability and placement_probability >= 50 %}
+
+    <span class="probability-badge medium">
+        Medium Probability
+    </span>
+
+    {% else %}
+
+    <span class="probability-badge low">
+        Low Probability
+    </span>
+
+    {% endif %}
+
+</div>
+
+        <!-- Progress Bar -->
+
+<div class="progress-section">
+
+    <h3>
+        Probability
+    </h3>
+
+    <h2 class="probability-score">
+        {{ placement_probability }}%
+    </h2>
+
+    <div class="progress-bar">
+
+        <div class="progress-fill" 
+                style="width: {{ placement_probability }}%;">
+        </div>
+
+    </div>
+
+    <div class="progress-labels">
+
+        <span>0%</span>
+        <span>25%</span>
+        <span>50%</span>
+        <span>75%</span>
+        <span>100%</span>
+
+    </div>
+
+</div>
+
+</section>
+
+<section class="cta-section">
+
+    <div class="cta-content">
+
+        <div>
+
+            <h2>
+                Ready to explore your recommended career path?
+            </h2>
+
+            <p>
+                Discover the career role that best matches
+                your skills, strengths, and placement profile.
+            </p>
+
+        </div>
+
+        <a href="/career">
+
+            <button class="cta-btn">
+
+                View Career Recommendation →
+
+            </button>
+
+        </a>
+
+    </div>
+
+</section>
+
+<section class="motivation-card">
+
+    {% if placement_probability >= 50 %}
+
+    <div class="motivation-content">
+
+        <div class="motivation-icon">
+            🚀
+        </div>
+
+        <div>
+
+            <h2>Great Work!</h2>
+
+            <p>
+                You are on the right track for placement
+                success. Keep building projects and
+                improving your skills.
+            </p>
+
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <div class="motivation-content">
+
+        <div class="motivation-icon">
+            💡
+        </div>
+
+        <div>
+
+            <h2>Keep Improving!</h2>
+
+            <p>
+                Focus on improving your skills and
+                gaining more experience to increase
+                your placement chances.
+            </p>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+{% endif %}
+
+</main>
+
+</div>
+
+</body>
+
+</html>
