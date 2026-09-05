@@ -17,7 +17,7 @@ body{
 /* Sidebar */
 
 .sidebar{
-    width:280px;
+    width:340px;
     background:white;
     padding:25px;
     border-right:1px solid #e5e7eb;
@@ -45,11 +45,21 @@ body{
     background:#f3f4f6;
     cursor:pointer;
     font-size:15px;
+    min-height:56px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    white-space:nowrap;
 }
 
 .sidebar button:hover{
     background:#4f46e5;
     color:white;
+}
+
+.sidebar a{
+    text-decoration:none;
+    display:block;
 }
 
 /* Main */
@@ -78,9 +88,10 @@ body{
 /* Cards */
 
 .card{
-    background:white;
-    padding:25px;
-    border-radius:16px;
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
 }
 
 .card h2{
@@ -564,3 +575,147 @@ input[type="range"]{
     color:white !important;
 }
 
+/* prediction page */
+
+.circle-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+
+    border: 12px solid #4F46E5;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background: white;
+}
+
+.circle h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #1E293B;
+}
+
+.circle p {
+    margin-top: 5px;
+    color: #64748B;
+}
+
+.progress-section {
+    margin-top: 30px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: #E5E7EB;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #4F46E5;
+    border-radius: 20px;
+}
+
+.progress-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #64748B;
+}
+
+.prediction-card{
+    display:grid;
+    grid-template-columns:1fr 1fr 250px;
+    gap:40px;
+    align-items:center;
+}
+
+.success-card{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    margin-top: 25px;
+    background:#ecfdf5;
+    border:1px solid #bbf7d0;
+
+    padding:25px;
+    border-radius:16px;
+    margin-bottom:25px;
+}
+
+.success-icon{
+    width:50px;
+    height:50px;
+
+    border-radius:50%;
+    background:#22c55e;
+    color:white;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:24px;
+}
+
+.motivation-card{
+    background:white;
+    border-radius:16px;
+    padding:25px;
+    margin-top:25px;
+}
+
+.motivation-content{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.motivation-icon{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:#EEF2FF;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+}
+
+.motivation-card h2{
+    margin-bottom:10px;
+    color:#1E293B;
+}
+
+.motivation-card p{
+    color:#64748B;
+    line-height:1.6;
+}
+
+.progress-section{
+    margin-top:30px;
+}
+
+.progress-section h3{
+    color:#64748B;
+    font-size:16px;
+    margin-bottom:8px;
+}
+
+.probability-score{
+    font-size:36px;
+    color:#1E293B;
+    margin-bottom:15px;
+}
