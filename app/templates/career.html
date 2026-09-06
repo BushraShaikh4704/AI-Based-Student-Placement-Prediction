@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Career Recommendation</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <h1>🎓 CareerAI</h1>
+
+        <p>Placement Predictor</p>
+
+        <hr>
+
+        <a href="/">
+            <button>🏠 Dashboard</button>
+        </a>
+
+        <a href="/assessment">
+            <button>📋 Student Assessment</button>
+        </a>
+
+        <a href="/prediction">
+            <button>📈 Prediction Result</button>
+        </a>
+
+        <a href="/career">
+            <button class="active-btn">
+                🎯 Career Recommendation
+            </button>
+        </a>
+
+        <a href="/skills">
+            <button>📊 Skill Analysis</button>
+        </a>
+
+        <a href="/history">
+            <button>🕒 Prediction History</button>
+        </a>
+
+    </aside>
+
+    <!-- Main Content -->
+
+    <main class="content">
+
+        <!-- Hero -->
+
+        <section class="hero">
+
+            <h1>
+                🎯 Career Recommendation
+            </h1>
+
+            <p>
+                Discover the best career path tailored
+                to your skills and profile.
+            </p>
+
+        </section>
+
+{% if assessment_required %}
+
+<section class="cta-section">
+
+    <div class="cta-content">
+
+        <div>
+
+            <h2>
+                ⚠ Assessment Form Required
+            </h2>
+
+            <p>
+                Please complete the Student Assessment Form
+                before generating a career recommendation.
+            </p>
+
+        </div>
+
+        <a href="/assessment">
+
+            <button class="cta-btn">
+
+                Fill Assessment Form →
+
+            </button>
+
+        </a>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+{% if not assessment_required and not career_generated %}
+<section class="cta-section">
+
+    <div class="cta-content">
+
+        <div>
+
+            <h2>
+                Ready to generate your career recommendation?
+            </h2>
+
+            <p>
+                Discover the career role that best matches
+                your skills and profile.
+            </p>
+
+        </div>
+
+        <a href="/generate_career">
+
+            <button class="cta-btn">
+
+                Generate Career Recommendation →
+
+            </button>
+
+        </a>
+
+    </div>
+
+</section>
+{% endif %}
+        <!-- Recommended + Alternative Career -->
+{% if career_generated %}
+        <section class="career-summary">
+
+    <div class="recommend-card">
+
+        <div class="career-icon">🎯</div>
+        <div class="career-info">
+            <p>Recommended Career</p>
+            <h2>{{ recommended_career }}</h2>
+        </div>
+
+    </div>
+
+    <div class="alternative-card">
+
+        <div class="career-icon">💡</div>
+        <div class="career-info">
+            <p>Alternative Career</p>
+            <h2>{{ alternative_career }}</h2>
+        </div>
+    </div>
+
+</section>
+
+        <!-- Suitability Score -->
+
+        <section class="card">
+
+            <h3>
+                Suitability Score
+            </h3>
+
+            <h1 class="career-score-display">
+
+                {{ career_suitability_score }}
+
+                <span>/ 10</span>
+
+            </h1>
+
+            <div class="progress-bar">
+
+                <div class="progress-fill"
+                     style="width: {{ (career_suitability_score * 10) }}%;">
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Other Career Options -->
+
+        <section class="card">
+
+            <h2>
+                Other Career Options
+            </h2>
+
+            <table class="career-table">
+
+                <thead>
+
+                <tr>
+
+                    <th>#</th>
+                    <th>Career</th>
+                    <th>Score</th>
+
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for career, score in career_recommendations %}
+
+                <tr>
+
+                    <td>
+                        {{ loop.index }}
+                    </td>
+
+                    <td>
+                        {{ career }}
+                    </td>
+
+                    <td>{{ "%.2f"|format(score) }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <!-- CTA -->
+
+        <section class="cta-section">
+
+            <div class="cta-content">
+
+                <div>
+
+                    <h2>
+                        Ready to analyze your skills?
+                    </h2>
+
+                    <p>
+                        Explore strengths, weaknesses,
+                        and improvement opportunities.
+                    </p>
+
+                </div>
+
+                <a href="/skills">
+
+                    <button class="cta-btn">
+
+                        View Skill Analysis →
+
+                    </button>
+
+                </a>
+
+            </div>
+
+        </section>
+{% endif %}
+    </main>
+
+</div>
+
+</body>
+
+</html>

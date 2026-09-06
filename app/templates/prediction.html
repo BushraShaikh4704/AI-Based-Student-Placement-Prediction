@@ -107,7 +107,7 @@
 
 {% endif %}
 
-{% if not assessment_required %}
+{% if not assessment_required and not placement_probability %}
 
 <section class="cta-section">
 
@@ -197,37 +197,6 @@
 
     </div>
 
-        <div>
-
-    <h3>
-        Placement Probability
-    </h3>
-
-    <h1>
-        {{ placement_probability }}%
-    </h1>
-
-    {% if placement_probability and placement_probability >= 75 %}
-
-    <span class="probability-badge high">
-        High Probability
-    </span>
-
-    {% elif placement_probability and placement_probability >= 50 %}
-
-    <span class="probability-badge medium">
-        Medium Probability
-    </span>
-
-    {% else %}
-
-    <span class="probability-badge low">
-        Low Probability
-    </span>
-
-    {% endif %}
-
-</div>
 
         <!-- Progress Bar -->
 
@@ -259,6 +228,25 @@
 
     </div>
 
+    {% if placement_probability >= 75 %}
+
+<p class="placement-level high">
+    High Probability
+</p>
+
+{% elif placement_probability >= 50 %}
+
+<p class="placement-level medium">
+    Medium Probability
+</p>
+
+{% else %}
+
+<p class="placement-level low">
+    Low Probability
+</p>
+
+{% endif %}
 </div>
 
 </section>

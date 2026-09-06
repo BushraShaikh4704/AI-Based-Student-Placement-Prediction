@@ -55,6 +55,8 @@
 
     </aside>
 
+    {% if prediction_data and career_data %}
+
     <!-- Main Content -->
 
     <main class="content">
@@ -85,27 +87,27 @@
 
         <div class="profile-box">
             <span>Name</span>
-            <h3>Bushra Shaikh</h3>
+            <h3>{{ prediction_data.student_name }}</h3>
         </div>
 
         <div class="profile-box">
             <span>Branch</span>
-            <h3>Computer Science</h3>
+            <h3>{{ prediction_data.branch }}</h3>
         </div>
 
         <div class="profile-box">
             <span>College Tier</span>
-            <h3>Tier 2</h3>
+            <h3>{{ prediction_data.college_tier }}</h3>
         </div>
 
         <div class="profile-box">
             <span>CGPA</span>
-            <h3>8.5</h3>
+            <h3>{{ prediction_data.cgpa }}</h3>
         </div>
 
         <div class="profile-box">
             <span>Backlogs</span>
-            <h3>0</h3>
+            <h3>{{ prediction_data.backlogs }}</h3>
         </div>
 
     </div>
@@ -114,77 +116,93 @@
 
         <!-- Placement + Insights -->
 
-        <section class="dashboard-content">
+<!-- Placement + Insights -->
 
-            <div class="placement-card">
+<section class="dashboard-content">
 
-                <h2>📈 Placement Prediction Result</h2>
+    <!-- Placement Card -->
 
-                <div class="placement-layout">
+    <div class="placement-card">
 
-    <div class="circle-wrapper">
+        <h2>📈 Placement Prediction Result</h2>
 
-        <div class="circle-progress">
+        <div class="placement-details">
 
-            <div class="circle-inner">
+                <div class="half-circle">
+                    <div class="half-circle-inner">
 
-                <h1>88.62%</h1>
+                        <h2>
+                            {{ prediction_data.placement_probability }}%
+                        </h2>
 
-                <p>High Placement Potential</p>
+                        <span class="probability-label">
+                            Placement Probability
+                        </span>
 
-                <span>✅ PLACED</span>
+                    </div>
+                </div>
 
-            </div>
+            {% if prediction_data.placement_probability >= 75 %}
+                <p class="placement-level">
+                    High Placement Potential
+                </p>
+            {% elif prediction_data.placement_probability >= 50 %}
+                <p class="placement-level">
+                    Medium Placement Potential
+                </p>
+            {% else %}
+                <p class="placement-level">
+                    Low Placement Potential
+                </p>
+            {% endif %}
+
+            <p class="placement-status">
+                {{ prediction_data.placement_status }}
+            </p>
+            
+            <p class="placement-message">
+                {% if prediction_data.placement_probability >= 75 %}
+                Excellent! You have a high probability of getting placed.
+                {% elif prediction_data.placement_probability >= 50 %}
+                You have a moderate chance of getting placed.
+                {% else %}
+                Focus on improving your skills and experience.
+                {% endif %}
+            </p>
 
         </div>
 
     </div>
 
-    <div class="placement-details">
+    <!-- Quick Insights Card -->
 
-        <h3>Placement Probability</h3>
+    <div class="insight-card">
 
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
+        <h2>💡 Quick Insights</h2>
+
+        <div class="insight-item">
+            <span>Technical Skills</span>
+            <strong>{{ prediction_data.technical_skill_score|round(1) }}/10</strong>
         </div>
 
-        <p class="placement-message">
-            Excellent! You have a high probability of getting placed.
-        </p>
+        <div class="insight-item">
+            <span>Experience Score</span>
+            <strong>{{ prediction_data.experience_score }}/10</strong>
+        </div>
+
+        <div class="insight-item">
+            <span>Communication</span>
+            <strong>{{ prediction_data.communication_skills|round(1) }}/10</strong>
+        </div>
+
+        <div class="insight-item">
+            <span>Aptitude Score</span>
+            <strong>{{ prediction_data.aptitude_score }}/10</strong>
+        </div>
 
     </div>
 
-</div>
-
-            </div>
-
-            <div class="insight-card">
-
-                <h2>💡 Quick Insights</h2>
-
-                <div class="insight-item">
-                    <span>Technical Skills</span>
-                    <strong>8.5/10</strong>
-                </div>
-
-                <div class="insight-item">
-                    <span>Experience Score</span>
-                    <strong>7.0/10</strong>
-                </div>
-
-                <div class="insight-item">
-                    <span>Communication</span>
-                    <strong>8.0/10</strong>
-                </div>
-
-                <div class="insight-item">
-                    <span>Overall Profile</span>
-                    <strong>7.8/10</strong>
-                </div>
-
-            </div>
-
-        </section>
+</section>
         
         <!-- Career Recommendation -->
 
@@ -200,10 +218,10 @@
 
                 <span>Recommended Career</span>
 
-                <h3>Machine Learning Engineer</h3>
+                <h3>{{ career_data.recommended_career }}</h3>
 
                 <div class="career-score">
-                    8.4/10
+                    {{ career_data.career_suitability_score }}/10
                 </div>
 
                 <p class="career-match">
@@ -216,25 +234,12 @@
 
                 <h4>Alternative Career Paths</h4>
 
+                {% for career, score in career_data.sorted_careers[1:] %}
                 <div class="alt-item">
-                    Data Scientist
-                    <strong>7.9/10</strong>
+                    {{ career }}
+                    <strong>{{ "%.2f"|format(score) }}/10</strong>
                 </div>
-
-                <div class="alt-item">
-                    Software Developer
-                    <strong>7.6/10</strong>
-                </div>
-
-                <div class="alt-item">
-                    Data Analyst
-                    <strong>7.4/10</strong>
-                </div>
-
-                <div class="alt-item">
-                    AI Engineer
-                    <strong>7.2/10</strong>
-                </div>
+                {% endfor %}
 
             </div>
 
@@ -250,13 +255,9 @@
 
             <ul>
 
-                <li>Strong Coding Skills</li>
-
-                <li>Good DSA Knowledge</li>
-
-                <li>Excellent ML Understanding</li>
-
-                <li>Good Project Experience</li>
+                {% for strength in prediction_data.strengths %}
+                    <li>{{ strength }}</li>
+                {% endfor %}
 
             </ul>
 
@@ -268,11 +269,9 @@
 
             <ul>
 
-                <li>Communication Skills</li>
-
-                <li>System Design Knowledge</li>
-
-                <li>Hackathon Participation</li>
+                {% for improvement in prediction_data.improvements %}
+                    <li>{{ improvement }}</li>
+                {% endfor %}
 
             </ul>
 
@@ -312,6 +311,24 @@
 </section>
 
     </main>
+
+{% else %}
+
+<section class="card">
+    <h2>📋 Assessment Required</h2>
+    <p>
+        Complete the assessment and generate a prediction
+        to view your dashboard insights.
+    </p>
+
+    <a href="/assessment">
+        <button class="cta-btn">
+            Take Assessment →
+        </button>
+    </a>
+</section>
+
+{% endif %}
 
 </div>
 
