@@ -128,7 +128,12 @@
 
         <div class="placement-details">
 
-                <div class="half-circle">
+                <div class="half-circle
+                    {% if prediction_data.placement_status == 'Placed' %}
+                        placed-circle
+                    {% else %}
+                        not-placed-circle
+                    {% endif %}">
                     <div class="half-circle-inner">
 
                         <h2>
@@ -156,9 +161,15 @@
                 </p>
             {% endif %}
 
-            <p class="placement-status">
-                {{ prediction_data.placement_status }}
+            {% if prediction_data.placement_status == "Placed" %}
+            <p class="placement-status placed-status">
+                Placed
             </p>
+            {% else %}
+            <p class="placement-status not-placed-status">
+                Not Placed
+            </p>
+            {% endif %}
             
             <p class="placement-message">
                 {% if prediction_data.placement_probability >= 75 %}
