@@ -151,7 +151,7 @@
 
         <div class="career-icon">🎯</div>
         <div class="career-info">
-            <p>Recommended Career</p>
+            <p><strong>Recommended Career</strong></p>
             <h2>{{ recommended_career }}</h2>
         </div>
 
@@ -161,7 +161,7 @@
 
         <div class="career-icon">💡</div>
         <div class="career-info">
-            <p>Alternative Career</p>
+            <p><strong>Alternative Career</strong></p>
             <h2>{{ alternative_career }}</h2>
         </div>
     </div>
@@ -172,27 +172,37 @@
 
         <section class="card">
 
-            <h3>
-                Suitability Score
-            </h3>
+    <div class="progress-section">
 
-            <h1 class="career-score-display">
+        <h3>
+            Career Suitability Score
+        </h3>
 
-                {{ career_suitability_score }}
+        <h2 class="career-score-display">
+            {{ career_suitability_score }}/10
+        </h2>
 
-                <span>/ 10</span>
+        <div class="progress-bar">
 
-            </h1>
-
-            <div class="progress-bar">
-
-                <div class="progress-fill"
-                     style="width: {{ (career_suitability_score * 10) }}%;">
-                </div>
-
+            <div class="progress-fill"
+                 style="width: {{ career_suitability_score * 10 }}%;">
             </div>
 
-        </section>
+        </div>
+
+        <div class="progress-labels">
+
+            <span>0</span>
+            <span>2.5</span>
+            <span>5</span>
+            <span>7.5</span>
+            <span>10</span>
+
+        </div>
+
+    </div>
+
+</section>
 
         <!-- Other Career Options -->
 

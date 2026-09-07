@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Skill Analysis</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <aside class="sidebar">
+
+        <h1>🎓 CareerAI</h1>
+
+        <p>Placement Predictor</p>
+
+        <hr>
+
+        <a href="/">
+            <button>🏠 Dashboard</button>
+        </a>
+
+        <a href="/assessment">
+            <button>📋 Student Assessment</button>
+        </a>
+
+        <a href="/prediction">
+            <button>📈 Prediction Result</button>
+        </a>
+
+        <a href="/career">
+            <button>🎯 Career Recommendation</button>
+        </a>
+
+        <a href="/skills">
+            <button class="active-btn">
+                📊 Skill Analysis
+            </button>
+        </a>
+
+        <a href="/history">
+            <button>🕒 Prediction History</button>
+        </a>
+
+    </aside>
+
+    <main class="content">
+
+        <section class="hero">
+
+            <h1>📊 Skill Analysis</h1>
+
+            <p>
+                Analyze your skills performance
+                and identify areas for growth.
+            </p>
+
+        </section>
+
+
+        {% if not skill_generated and not assessment_required %}
+
+        <section class="cta-section">
+
+            <div class="cta-content">
+
+                <div>
+
+                    <h2>
+                        Ready to analyze your skills?
+                    </h2>
+
+                    <p>
+                        Generate a complete skill analysis
+                        based on your assessment data.
+                    </p>
+
+                </div>
+
+                <a href="/generate_skills">
+
+                    <button class="cta-btn">
+
+                        View Your Skill Analysis →
+
+                    </button>
+
+                </a>
+
+            </div>
+
+        </section>
+
+        {% endif %}
+
+        {% if assessment_required %}
+
+        <section class="cta-section">
+
+            <div class="cta-content">
+
+                <div>
+
+                    <h2>
+                        ⚠ Assessment Form Required
+                    </h2>
+
+                    <p>
+                        Please complete the Student Assessment Form
+                        before viewing your Skill Analysis.
+                    </p>
+
+                </div>
+
+                <a href="/assessment">
+
+                    <button class="cta-btn">
+
+                        Fill Assessment Form →
+
+                    </button>
+
+                </a>
+
+            </div>
+
+        </section>
+
+        {% endif %}
+
+
+        {% if skill_generated %}
+
+        <!-- Quick Insights -->
+
+        <section class="card">
+
+            <h2>💡 Quick Insights</h2>
+
+            <div class="quick-insights-grid">
+
+                <div class="recommend-card">
+
+                    <div class="career-info">
+
+                        <p><strong>💼 Experience Score</strong></p>
+
+                        <h2>
+                            {{ prediction_data.experience_score }}
+                        </h2>
+
+                    </div>
+
+                </div>
+
+                <div class="alternative-card">
+
+                    <div class="career-info">
+
+                        <p><strong>🗣️ Communication Skills</strong></p>
+
+                        <h2>
+                            {{ "%.2f"|format(prediction_data.communication_skills) }}/10
+                        </h2>
+
+                    </div>
+
+                </div>
+
+                <div class="recommend-card">
+
+                    <div class="career-info">
+
+                        <p><strong>🧠 Aptitude Score</strong></p>
+
+                        <h2>
+                            {{ "%.2f"|format(prediction_data.aptitude_score) }}/10
+                        </h2>
+
+                    </div>
+
+                </div>
+
+                <div class="alternative-card">
+
+                    <div class="career-info">
+
+                        <p><strong>💻 Technical Skills</strong></p>
+
+                        <h2>
+                            {{ "%.2f"|format(prediction_data.technical_skill_score) }}/10
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Strengths -->
+
+        <section class="card">
+
+    <h2>⭐ Top Strengths</h2>
+
+    <div class="strength-tags">
+
+        {% for strength in prediction_data.strengths %}
+
+        <div class="strength-tag">
+
+            ✅ {{ strength }}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="strength-summary">
+
+        These are the areas where you performed best
+        based on your assessment results.
+
+    </div>
+
+</section>
+
+
+        <!-- Improvements -->
+
+<section class="card">
+
+    <h2>⚠ Areas To Improve</h2>
+
+    <div class="improvement-tags">
+
+        {% for item in prediction_data.improvements %}
+
+        <div class="improvement-tag">
+
+            ❌ {{ item }}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="improvement-summary">
+
+        Focus on improving these areas to increase
+        your placement readiness and career opportunities.
+
+    </div>
+
+</section>
+
+
+        <!-- CTA BUTTONS -->
+<section class="cta-grid">
+
+    <!-- Dashboard CTA -->
+
+    <div class="cta-section">
+
+        <div class="cta-content">
+
+            <div>
+
+                <h2>
+                    Your Dashboard is Ready, Want to Explore More?
+                </h2>
+
+                <p>
+                    Return to the dashboard to continue exploring
+                    your placement prediction and career insights.
+                </p>
+
+            </div>
+
+            <a href="/">
+
+                <button class="cta-btn">
+
+                    Back To Dashboard →
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- History CTA -->
+
+    <div class="cta-section">
+
+        <div class="cta-content">
+
+            <div>
+
+                <h2>
+                    Want to Review Previous Results?
+                </h2>
+
+                <p>
+                    Access your prediction history and compare
+                    previous assessments and recommendations.
+                </p>
+
+            </div>
+
+            <a href="/history">
+
+                <button class="cta-btn">
+
+                    View History →
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+</main>
+
+</div>
+
+</body>
+</html>
