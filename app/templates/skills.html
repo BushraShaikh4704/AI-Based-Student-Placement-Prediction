@@ -68,7 +68,6 @@
 
         </section>
 
-
         {% if not skill_generated and not assessment_required %}
 
         <section class="cta-section">
@@ -271,41 +270,9 @@
 </section>
 
 
-        <!-- CTA BUTTONS -->
+<!-- CTA BUTTONS -->
+
 <section class="cta-grid">
-
-    <!-- Dashboard CTA -->
-
-    <div class="cta-section">
-
-        <div class="cta-content">
-
-            <div>
-
-                <h2>
-                    Your Dashboard is Ready, Want to Explore More?
-                </h2>
-
-                <p>
-                    Return to the dashboard to continue exploring
-                    your placement prediction and career insights.
-                </p>
-
-            </div>
-
-            <a href="/">
-
-                <button class="cta-btn">
-
-                    Back To Dashboard →
-
-                </button>
-
-            </a>
-
-        </div>
-
-    </div>
 
     <!-- History CTA -->
 
@@ -316,12 +283,43 @@
             <div>
 
                 <h2>
-                    Want to Review Previous Results?
+                    Want To Save This Result?
                 </h2>
 
                 <p>
-                    Access your prediction history and compare
-                    previous assessments and recommendations.
+                    Save your prediction, career recommendation
+                    and skill analysis into your history.
+                </p>
+
+            </div>
+
+            <a href="/save_history">
+
+                <button class="cta-btn">
+
+                    Save Result To History →
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="cta-section">
+
+        <div class="cta-content">
+
+            <div>
+
+                <h2>
+                    Want To View History?
+                </h2>
+
+                <p>
+                    Review your previously saved predictions,
+                    career recommendations and assessments.
                 </p>
 
             </div>
@@ -330,7 +328,7 @@
 
                 <button class="cta-btn">
 
-                    View History →
+                    Go To History Page →
 
                 </button>
 
@@ -341,6 +339,60 @@
     </div>
 
 </section>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+
+{% if "already saved" in messages[0] %}
+
+<section id="save-message" class="error-card">
+
+    <div class="error-icon">
+        !
+    </div>
+
+    <div>
+
+        <h2>
+            Result Already Saved
+        </h2>
+
+        <p>
+            This result has already been saved
+            to Prediction History.
+        </p>
+
+    </div>
+
+</section>
+
+{% else %}
+
+<section id="save-message" class="success-card">
+
+    <div class="success-icon">
+        ✓
+    </div>
+
+    <div>
+
+        <h2>
+            Result Saved Successfully!
+        </h2>
+
+        <p>
+            Your result has been added
+            to Prediction History.
+        </p>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+{% endif %}
+{% endwith %}
 
 {% endif %}
 

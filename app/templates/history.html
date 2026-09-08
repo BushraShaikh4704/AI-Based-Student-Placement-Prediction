@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Prediction History</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <aside class="sidebar">
+
+        <h1>🎓 CareerAI</h1>
+
+        <p>Placement Predictor</p>
+
+        <hr>
+
+        <a href="/">
+            <button>🏠 Dashboard</button>
+        </a>
+
+        <a href="/assessment">
+            <button>📋 Student Assessment</button>
+        </a>
+
+        <a href="/prediction">
+            <button>📈 Prediction Result</button>
+        </a>
+
+        <a href="/career">
+            <button>🎯 Career Recommendation</button>
+        </a>
+
+        <a href="/skills">
+            <button>📊 Skill Analysis</button>
+        </a>
+
+        <a href="/history">
+            <button class="active-btn">
+                🕒 Prediction History
+            </button>
+        </a>
+
+    </aside>
+
+    <main class="content">
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <h1>🕒 Prediction History</h1>
+
+            <p>
+                Review your previous placement predictions,
+                career recommendations and assessment results.
+            </p>
+
+        </section>
+
+
+        <!-- HISTORY OVERVIEW -->
+
+        <section class="card">
+
+            <h2>📊 History Overview</h2>
+
+            <div class="quick-insights-grid">
+
+                <div class="recommend-card">
+
+                    <div class="career-info">
+
+                        <p><strong>Total Records</strong></p>
+
+                        <h2>
+                            {{ total_records }}
+                        </h2>
+
+                    </div>
+
+                </div>
+
+                <div class="alternative-card">
+
+                    <div class="career-info">
+
+                        <p><strong>✅ Placed</strong></p>
+
+                        <h2>
+                            {{ placed_count }}
+                        </h2>
+
+                    </div>
+
+                </div>
+
+                <div class="recommend-card">
+
+                    <div class="career-info">
+
+                        <p><strong>❌ Not Placed</strong></p>
+
+                        <h2>
+                            {{ not_placed_count }}
+                        </h2>
+
+                    </div>
+
+                </div>
+
+                <div class="alternative-card">
+
+                    <div class="career-info">
+
+                        <p>
+                            <strong>📈 Placement Rate</strong>
+                        </p>
+
+                        <h2>
+                            {{ placement_rate }}%
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- HISTORY TABLE -->
+
+        <section class="card">
+
+    <h2>📋 Recent Records</h2>
+
+        <p class="history-subtitle">
+            Showing the latest 10 placement predictions stored in the system.
+        </p>
+
+    <div class="history-table">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Branch</th>
+                    <th>Status</th>
+                    <th>Probability</th>
+                    <th>Recommended Career</th>
+                    <th>Date/Time</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for record in records %}
+
+                <tr>
+
+                    <td>{{ loop.index }}</td>
+
+                    <td>{{ record.student_name }}</td>
+
+                    <td>{{ record.branch }}</td>
+
+                    <td>
+
+                        {% if record.placement_status == 1 %}
+
+                            ✅ Placed
+
+                        {% else %}
+
+                            ❌ Not Placed
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {{ "%.2f"|format(record.placement_probability) }}%
+
+                    </td>
+
+                    <td>
+
+                        {{ record.recommended_career }}
+
+                    </td>
+
+                    <td>
+
+                        {{ record.created_at.strftime('%d-%m-%Y %I:%M %p') }}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+        <!-- CTA BUTTONS -->
+
+        <section class="cta-grid">
+
+            <!-- SAVE HISTORY -->
+
+            <div class="cta-section">
+
+                <div class="cta-content">
+
+                    <div>
+
+                        <h2>
+                            Want To Create Another Assessment?
+                        </h2>
+
+                        <p>
+                            Start a new assessment and generate
+                            fresh placement and career insights.
+                        </p>
+
+                    </div>
+
+                    <a href="/assessment">
+
+                        <button class="cta-btn">
+
+                            Take New Assessment →
+
+                        </button>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- DASHBOARD -->
+
+            <div class="cta-section">
+
+                <div class="cta-content">
+
+                    <div>
+
+                        <h2>
+                            Return To Dashboard
+                        </h2>
+
+                        <p>
+                            Continue exploring your placement,
+                            career and skill insights.
+                        </p>
+
+                    </div>
+
+                    <a href="/">
+
+                        <button class="cta-btn">
+
+                            Back To Dashboard →
+
+                        </button>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>
