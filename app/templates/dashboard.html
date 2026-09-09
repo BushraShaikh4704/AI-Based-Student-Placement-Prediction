@@ -53,9 +53,13 @@
             <button>🕒 Prediction History</button>
         </a>
 
-    </aside>
+        <div class="sidebar-banner">
+            <img
+                src="{{ url_for('static', filename='images/ai-guidance.png') }}"
+                alt="AI Powered Guidance">
+        </div>
 
- {% if prediction_data and career_data %}
+    </aside>
 
     <!-- Main Content -->
 
@@ -79,6 +83,8 @@
         </section>
 
         <!-- Profile -->
+
+{% if prediction_data and career_data %}
 
         <section class="card">
 
@@ -127,15 +133,14 @@
 
         <h2>📈 Placement Prediction Result</h2>
 
-        <div class="placement-details">
+        <div class="placement-layout">
 
-                <div class="half-circle
-                    {% if prediction_data.placement_status == 'Placed' %}
-                        placed-circle
-                    {% else %}
-                        not-placed-circle
-                    {% endif %}">
-                    <div class="half-circle-inner">
+            <div class="probability-ring-wrapper">
+
+                <div class="probability-ring"
+                    style="--percentage: {{ prediction_data.placement_probability }};">
+
+                    <div class="probability-ring-inner">
 
                         <h2>
                             {{ prediction_data.placement_probability }}%
@@ -146,41 +151,57 @@
                         </span>
 
                     </div>
+
                 </div>
 
-            {% if prediction_data.placement_probability >= 75 %}
-                <p class="placement-level">
+            </div>
+
+            <div class="placement-info">
+
+                {% if prediction_data.placement_probability >= 75 %}
+                <p class="placement-level high">
                     High Placement Potential
                 </p>
-            {% elif prediction_data.placement_probability >= 50 %}
-                <p class="placement-level">
+                {% elif prediction_data.placement_probability >= 50 %}
+                <p class="placement-level medium">
                     Medium Placement Potential
                 </p>
-            {% else %}
-                <p class="placement-level">
+                {% else %}
+                <p class="placement-level low">
                     Low Placement Potential
                 </p>
-            {% endif %}
-
-            {% if prediction_data.placement_status == "Placed" %}
-            <p class="placement-status placed-status">
-                Placed
-            </p>
-            {% else %}
-            <p class="placement-status not-placed-status">
-                Not Placed
-            </p>
-            {% endif %}
-            
-            <p class="placement-message">
-                {% if prediction_data.placement_probability >= 75 %}
-                Excellent! You have a high probability of getting placed.
-                {% elif prediction_data.placement_probability >= 50 %}
-                You have a moderate chance of getting placed.
-                {% else %}
-                Focus on improving your skills and experience.
                 {% endif %}
-            </p>
+
+                {% if prediction_data.placement_status == "Placed" %}
+                <p class="placement-status placed-status">
+                    ✅ Placed
+                </p>
+                {% else %}
+                <p class="placement-status not-placed-status">
+                    ❌ Not Placed
+                </p>
+                {% endif %}
+
+                <div class="placement-message-card
+                    {% if prediction_data.placement_probability >= 75 %}
+                        high-message
+                    {% elif prediction_data.placement_probability >= 50 %}
+                        medium-message
+                    {% else %}
+                        low-message
+                    {% endif %}">
+
+                    {% if prediction_data.placement_probability >= 75 %}
+                        ✅ Excellent! You have a high probability of getting placed.
+                    {% elif prediction_data.placement_probability >= 50 %}
+                        👍 You have a moderate chance of getting placed.
+                    {% else %}
+                        ❗ Focus on improving your skills and experience.
+                    {% endif %}
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -228,9 +249,21 @@
 
             <div class="recommended-career">
 
-                <span>Recommended Career</span>
+                <h5><strong>Recommended Career</strong></h5>
 
                 <h3>{{ career_data.recommended_career }}</h3>
+
+                <div class="career-stars">
+
+                    {% for i in range(career_data.get('star_rating', 0)) %}
+                        <span class="star filled">★</span>
+                    {% endfor %}
+
+                    {% for i in range(5 - career_data.get('star_rating', 0)) %}
+                        <span class="star">☆</span>
+                    {% endfor %}
+
+                </div>
 
                 <div class="career-score">
                     {{ career_data.career_suitability_score }}/10
@@ -322,29 +355,30 @@
 
 </section>
 
-    </main>
+</main>
 
 {% else %}
 
-<section class="card">
-    <h2>📋 Assessment Required</h2>
-    <p>
-        Complete the assessment and generate a prediction
-        to view your dashboard insights.
-    </p>
-
-    <a href="/assessment">
-        <button class="cta-btn">
-            Take Assessment →
-        </button>
-    </a>
+<section class="cta-section">
+    <div class="cta-content">
+        <div>
+            <h2>
+                ⚠ Assessment Form Required
+            </h2>
+            <p>
+                Complete the assessment and generate a prediction
+                to view your dashboard insights.
+            </p>
+        </div>
+        <a href="/assessment">
+            <button class="cta-btn">
+                Fill Assessment Form →
+            </button>
+        </a>
+    </div>
 </section>
 
 {% endif %}
-
-</div>
-
-<script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 

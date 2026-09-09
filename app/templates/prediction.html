@@ -53,6 +53,12 @@
             <button>🕒 Prediction History</button>
         </a>
 
+        <div class="sidebar-banner">
+            <img
+                src="{{ url_for('static', filename='images/ai-guidance.png') }}"
+                alt="AI Powered Guidance">
+        </div>
+
     </aside>
 
     <!-- Main Content -->
@@ -174,7 +180,7 @@
         {% if placement_status == "Placed" %}
 
         <h1 class="placed-status">
-            Placed
+            ✅ Placed
         </h1>
 
         <p class="status-description">
@@ -185,7 +191,7 @@
         {% else %}
 
         <h1 class="not-placed-status">
-            Not Placed
+            ❌ Not Placed
         </h1>
 
         <p class="status-description">
