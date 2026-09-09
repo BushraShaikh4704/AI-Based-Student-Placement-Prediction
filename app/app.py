@@ -1130,12 +1130,14 @@ def predict():
 
     session["insert_query"] = insert_query
     session["student_record"] = student_record
+    star_rating = round(career_suitability_score / 2)
 
     session["career_data"] = {
         "recommended_career": recommended_career,
         "alternative_career": alternative_career,
         "career_suitability_score": career_suitability_score,
-        "sorted_careers": sorted_careers
+        "sorted_careers": sorted_careers,
+        "star_rating": star_rating
     }
 
     session["prediction_data"] = {
@@ -1154,6 +1156,8 @@ def predict():
         "strengths": strengths,
         "improvements": improvements
     }
+
+    print(session.get("career_data"))
 
     return render_template(
         "prediction.html",
