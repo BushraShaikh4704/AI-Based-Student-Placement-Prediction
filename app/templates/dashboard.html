@@ -249,7 +249,7 @@
 
         <div class="insight-item">
             <span>Experience Score</span>
-            <strong>{{ prediction_data.experience_score|round(1) }}</strong>
+            <strong>{{ "%.1f"|format(prediction_data.experience_score) }}</strong>
         </div>
 
         <div class="insight-item">
