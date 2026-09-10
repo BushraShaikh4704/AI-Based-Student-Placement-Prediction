@@ -25,3 +25,23 @@ if (branchSelect) {
 
     updateSkills();
 }
+
+const toggleButton = document.getElementById("sidebar-toggle");
+const sidebar = document.querySelector(".sidebar");
+
+if(toggleButton && sidebar){
+
+    toggleButton.addEventListener("click", () => {
+
+        sidebar.classList.toggle("collapsed");
+
+        if(sidebar.classList.contains("collapsed")){
+            toggleButton.innerHTML = "❯❯";
+        }
+        else{
+            toggleButton.innerHTML = "❮❮";
+        }
+
+    });
+
+}

@@ -77,12 +77,47 @@ body{
     display:block;
 }
 
-/* Main */
+.sidebar a{
+    text-decoration:none;
+    display:block;
+}
+
+.sidebar.collapsed {
+    width: 80px;
+    min-width: 80px;
+}
+
+.sidebar.collapsed .text,
+.sidebar.collapsed .sidebar-title,
+.sidebar.collapsed .sidebar-subtitle,
+.sidebar.collapsed .sidebar-divider,
+.sidebar.collapsed .sidebar-banner {
+    display: none;
+}
+
+.sidebar.collapsed button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar .icon {
+    font-size: 20px;
+}
 
 .content{
     flex:1;
     padding:40px;
+    transition:all 0.3s ease;
 }
+
+.sidebar-toggle{
+    width:100%;
+    margin-bottom:15px;
+    cursor:pointer;
+}
+
+/* Main */
 
 .hero{
     background:white;
@@ -1015,10 +1050,213 @@ input[type="range"]{
     font-size:18px;
 }
 
+/* =========================
+   MOBILE RESPONSIVE DESIGN
+========================= */
+
 @media (max-width: 768px) {
 
-    .cta-grid {
-        flex-direction: column;
+    .container{
+        flex-direction:column;
     }
 
+    .sidebar{
+        width:100%;
+        border-right:none;
+        border-bottom:1px solid #e5e7eb;
+        padding:20px;
+    }
+
+    /* Hide collapse button on mobile */
+    .sidebar-toggle{
+        display:none;
+    }
+
+    /* Keep title */
+    .sidebar h1{
+        font-size:45px;
+        text-align:left;
+        margin:0;
+    }
+
+    .sidebar p{
+        text-align:left;
+        margin-top:-10px;
+        font-size:20px;
+        color:#666;
+    }
+
+    /* Navigation becomes 2-column grid */
+    .sidebar-nav a{
+        width:100%;
+    }
+
+    .sidebar-nav button{
+        margin-bottom:0;
+        width:100%;
+        font-size:16px;
+    }
+
+    .sidebar-toggle{
+        display:none !important;
+    }
+
+    .sidebar hr{
+        display:none;
+    }
+
+    .sidebar-banner{
+        display:none;
+    }
+
+    .sidebar{
+        gap:15px;
+    }
+
+    /* Buttons grid */
+    .sidebar-nav{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:12px;
+    }
+
+    /* Main Content */
+
+    .content{
+        padding:15px;
+    }
+
+    .hero{
+        padding:20px;
+    }
+
+    .hero h1{
+        font-size:28px;
+        line-height:1.3;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    /* Profile */
+
+    .profile-row{
+        grid-template-columns:1fr;
+    }
+
+    .profile-box{
+        width:100%;
+    }
+
+    /* Dashboard */
+
+    .dashboard-content{
+        grid-template-columns:1fr;
+    }
+
+    .placement-layout{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .probability-ring-wrapper{
+        width:220px;
+        height:220px;
+    }
+
+    .probability-ring{
+        width:220px;
+        height:220px;
+    }
+
+    .probability-ring-inner{
+        width:180px;
+        height:180px;
+        left:20px;
+        top:20px;
+    }
+
+    .probability-ring-inner h2{
+        font-size:38px;
+    }
+
+    /* Career */
+
+    .career-layout{
+        grid-template-columns:1fr;
+    }
+
+    .career-summary{
+        grid-template-columns:1fr;
+    }
+
+    .recommend-card,
+    .alternative-card{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .career-info h2{
+        font-size:24px;
+    }
+
+    /* Skills */
+
+    .quick-insights-grid{
+        grid-template-columns:1fr;
+    }
+
+    /* Assessment Form */
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full-width{
+        grid-column:auto;
+    }
+
+    /* Prediction */
+
+    .prediction-card{
+        grid-template-columns:1fr;
+        gap:30px;
+    }
+
+    /* CTA */
+
+    .cta-content{
+        flex-direction:column;
+        gap:20px;
+        text-align:center;
+    }
+
+    .cta-btn{
+        width:100%;
+    }
+
+    /* Tables */
+
+    .history-table{
+        overflow-x:auto;
+    }
+
+    .career-table{
+        min-width:600px;
+    }
+
+    .history-table table{
+        min-width:700px;
+    }
+
+    /* Headings */
+
+    .card h2,
+    .placement-card h2,
+    .career-card h2,
+    .strength-card h2,
+    .improve-card h2{
+        font-size:24px;
+    }
 }

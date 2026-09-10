@@ -19,44 +19,73 @@
 
 <div class="container">
 
+    <!-- Sidebar -->
+
     <aside class="sidebar">
 
-        <h1>🎓 CareerAI</h1>
+        <button id="sidebar-toggle" class="sidebar-toggle">
+            ❮❮
+        </button>
 
-        <p>Placement Predictor</p>
+        <h1 class="sidebar-title">🎓 CareerAI</h1>
 
-        <hr>
+        <p class="sidebar-subtitle">
+            Placement Predictor
+        </p>
 
-        <a href="/">
-            <button>🏠 Dashboard</button>
-        </a>
+        <hr class="sidebar-divider">
 
-        <a href="/assessment">
-            <button>📋 Student Assessment</button>
-        </a>
+        <div class="sidebar-nav">
+            <a href="/">
+                <button>
+                    <span class="icon">🏠</span>
+                    <span class="text">Dashboard</span>
+                </button>
+            </a>
 
-        <a href="/prediction">
-            <button>📈 Prediction Result</button>
-        </a>
+            <a href="/assessment">
+                <button>
+                    <span class="icon">📋</span>
+                    <span class="text">Student Assessment</span>
+                </button>
+            </a>
 
-        <a href="/career">
-            <button>🎯 Career Recommendation</button>
-        </a>
+            <a href="/prediction">
+                <button>
+                    <span class="icon">📈</span>
+                    <span class="text">Prediction Result</span>
+                </button>
+            </a>
 
-        <a href="/skills">
-            <button>📊 Skill Analysis</button>
-        </a>
+            <a href="/career">
+                <button>
+                    <span class="icon">🎯</span>
+                    <span class="text">Career Recommendation</span>
+                </button>
+            </a>
 
-        <a href="/history">
-            <button class="active-btn">
-                🕒 Prediction History
-            </button>
-        </a>
+            <a href="/skills">
+                <button>
+                    <span class="icon">📊</span>
+                    <span class="text">Skill Analysis</span>
+                </button>
+            </a>
+
+            <a href="/history">
+                <button class="active-btn">
+                    <span class="icon">🕒</span>
+                    <span class="text">Prediction History</span>
+                </button>
+            </a>
+
+        </div>
 
         <div class="sidebar-banner">
+
             <img
                 src="{{ url_for('static', filename='images/ai-guidance.png') }}"
                 alt="AI Powered Guidance">
+
         </div>
 
     </aside>
@@ -310,6 +339,8 @@
     </main>
 
 </div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 
