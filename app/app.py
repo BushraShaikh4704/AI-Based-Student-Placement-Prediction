@@ -235,7 +235,7 @@ def predict():
     college_tier = form_data["college_tier"]
     backlogs = int(form_data["backlogs"])
     dsa_score = float(form_data["dsa_score"])
-    aptitude_score = float(form_data["aptitude_score"])
+    aptitude_score = float(form_data["aptitude_score"]) * 10
     communication_skills = float(form_data["communication_skills"])
     ml_knowledge = float(form_data["ml_knowledge"])
     system_design = float(form_data["system_design"])
@@ -385,7 +385,6 @@ def predict():
                     if prediction == 1
                     else "Not Placed"
         )
-   
     branch_career_pools = {
     "CSE": [
         "Software Developer",
@@ -1125,8 +1124,6 @@ def predict():
     %s, %s, %s,
     %s, %s, %s, %s
     )"""
-
-    print(len(student_record))
 
     session["insert_query"] = insert_query
     session["student_record"] = student_record
