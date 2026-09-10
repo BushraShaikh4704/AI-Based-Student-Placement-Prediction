@@ -191,7 +191,7 @@
                         <p><strong>💼 Experience Score</strong></p>
 
                         <h2>
-                            {{ prediction_data.experience_score }}
+                            {{ "%.1f"|format(prediction_data.experience_score) }}
                         </h2>
 
                     </div>
@@ -205,7 +205,7 @@
                         <p><strong>🗣️ Communication Skills</strong></p>
 
                         <h2>
-                            {{ "%.2f"|format(prediction_data.communication_skills) }}/10
+                            {{ "%.1f"|format(prediction_data.communication_skills) }}/10
                         </h2>
 
                     </div>
@@ -219,7 +219,7 @@
                         <p><strong>🧠 Aptitude Score</strong></p>
 
                         <h2>
-                            {{ "%.2f"|format(prediction_data.aptitude_score) }}/10
+                            {{ "%.1f"|format(prediction_data.aptitude_score) }}/10
                         </h2>
 
                     </div>
@@ -233,7 +233,7 @@
                         <p><strong>💻 Technical Skills</strong></p>
 
                         <h2>
-                            {{ "%.2f"|format(prediction_data.technical_skill_score) }}/10
+                            {{ "%.1f"|format(prediction_data.technical_skill_score) }}/10
                         </h2>
 
                     </div>

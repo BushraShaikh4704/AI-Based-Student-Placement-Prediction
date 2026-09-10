@@ -249,7 +249,7 @@
 
         <div class="insight-item">
             <span>Experience Score</span>
-            <strong>{{ prediction_data.experience_score }}/10</strong>
+            <strong>{{ prediction_data.experience_score|round(1) }}</strong>
         </div>
 
         <div class="insight-item">
@@ -259,7 +259,7 @@
 
         <div class="insight-item">
             <span>Aptitude Score</span>
-            <strong>{{ prediction_data.aptitude_score }}/10</strong>
+            <strong>{{ prediction_data.aptitude_score|round(1) }}/10</strong>
         </div>
 
     </div>

@@ -1149,7 +1149,7 @@ def predict():
         "technical_skill_score": technical_skill_score,
         "experience_score": experience_score,
         "communication_skills": communication_skills,
-        "aptitude_score": aptitude_score,
+        "aptitude_score": aptitude_score / 10,
         "strengths": strengths,
         "improvements": improvements
     }
