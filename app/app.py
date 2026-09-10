@@ -18,9 +18,9 @@ app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY")
 
 def get_db_connection():
-
     return mysql.connector.connect(
         host=os.getenv("MYSQL_HOST"),
+        port=int(os.getenv("MYSQL_PORT")),
         user=os.getenv("MYSQL_USER"),
         password=os.getenv("MYSQL_PASSWORD"),
         database=os.getenv("MYSQL_DATABASE")

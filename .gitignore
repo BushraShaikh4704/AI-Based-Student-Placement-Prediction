@@ -4,3 +4,5 @@ __pycache__/
 .ipynb_checkpoints/
 *.db
 .env
+ca.pem
+data/placement_career_db.sql
