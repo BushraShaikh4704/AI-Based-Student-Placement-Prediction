@@ -1,8 +1,8 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 ![Python](https://img.shields.io/badge/Python-3.14-blue)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-![Tools](https://img.shields.io/badge/Tools-JupyterLab,MachineLearning-pink)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-![Status](https://img.shields.io/badge/Status-Ongoing-brightgreen)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-![Live](https://img.shields.io/badge/Live-Website&App-red)
+![Tools](https://img.shields.io/badge/Tools-Render,AivenCloudDB-pink)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+![Live](https://img.shields.io/badge/Live-Website-red)
 
 
 # 🎓 AI-Based Student Placement Prediction and Career Recommendation System
@@ -11,7 +11,12 @@
 
 The AI-Based Student Placement Prediction and Career Recommendation System is a Machine Learning project developed to predict a student's placement chances and recommend suitable career paths based on academic performance, technical skills, practical experience, and extracurricular activities.
 
-The system combines placement prediction with a branch-aware career recommendation engine, enabling students from different engineering disciplines to receive personalized career guidance. The project also includes database integration and a user-friendly web application for real-time predictions and recommendations.
+The system combines placement prediction with a branch-aware career recommendation engine, enabling students from different engineering disciplines to receive personalized career guidance. The project also includes cloud database integration and a responsive web application for real-time predictions and recommendations.
+
+## 🌐 Live Application
+
+🔗 Live Website: [🚀 Visit↗](https://student-placement-career-recommendation.onrender.com/)
+
 
 ## 🎯 Objectives
 
@@ -19,47 +24,52 @@ The system combines placement prediction with a branch-aware career recommendati
 * Calculate placement probability using Machine Learning.
 * Recommend suitable career paths based on student profiles.
 * Support multiple engineering branches through branch-specific recommendations.
-* Store prediction results and student information in a MySQL database.
-* Provide an interactive and easy-to-use web application.
+* Store prediction results and student information in a cloud database.
+* Provide an interactive and responsive web application.
 
 ## 🛠️ Technology Stack
 
 ### Programming Language
-
 * Python
 
-### Libraries and Frameworks
-
+### Machine Learning
 * Pandas
 * NumPy
 * Scikit-Learn
 * Joblib
-* Streamlit
-* MySQL Connector Python
+
+### Backend
+* Flask
+
+### Frontend
+* HTML
+* CSS
+* JavaScript
 
 ### Database
-
 * MySQL
+* Aiven Cloud Database
+
+### Deployment
+* Render
 
 ### Development Environment
-
 * Jupyter Notebook
 * Visual Studio Code
 * GitHub
+
 
 ## 📊 Dataset Description
 
 The project uses a student placement dataset containing academic, technical, and extracurricular information.
 
 ### Academic Information
-
 * Branch
 * College Tier
 * CGPA
 * Backlogs
 
 ### Technical Skills
-
 * Coding Skills
 * DSA Score
 * Aptitude Score
@@ -68,7 +78,6 @@ The project uses a student placement dataset containing academic, technical, and
 * System Design Knowledge
 
 ### Experience and Activities
-
 * Internships
 * Projects
 * Certifications
@@ -77,33 +86,29 @@ The project uses a student placement dataset containing academic, technical, and
 * Extracurricular Activities
 
 ### Target Variable
-
 * Placement Status
+* Recommended Career
+
 
 ## ⚙️ Feature Engineering
 
 To improve prediction performance, additional features were created from the original dataset.
 
 ### Engineered Features
-
 * Technical Skill Score
 * Experience Score
 * Has Backlog
 * Technical Skill Gap
-
 These engineered features help the model better understand a student's overall skill level, experience profile, and placement readiness.
+
 
 ## 🤖 Machine Learning Models
 
-Multiple Machine Learning algorithms were trained and evaluated during the project.
-
 ### Models Evaluated
-
 * Logistic Regression
 * Decision Tree Classifier
 * Random Forest Classifier
 * Gradient Boosting Classifier
-
 After evaluation and comparison, the best-performing model was selected for deployment in the final application.
 
 
@@ -112,10 +117,8 @@ After evaluation and comparison, the best-performing model was selected for depl
 The placement prediction module analyzes student information and predicts placement outcomes.
 
 ### System Outputs
-
 * Placement Status
 * Placement Probability
-
 The prediction is generated using the trained Machine Learning model after applying preprocessing and feature engineering techniques.
 
 
@@ -124,7 +127,6 @@ The prediction is generated using the trained Machine Learning model after apply
 The project includes a custom branch-aware recommendation engine that suggests career paths according to the student's engineering discipline and skill profile.
 
 ### Supported Branches
-
 * Computer Science Engineering (CSE)
 * Information Technology (IT)
 * Electronics and Communication Engineering (ECE)
@@ -134,7 +136,6 @@ The project includes a custom branch-aware recommendation engine that suggests c
 * Chemical Engineering
 
 ### Career Recommendation Factors
-
 * Technical Skills
 * Academic Performance
 * Internships
@@ -144,18 +145,16 @@ The project includes a custom branch-aware recommendation engine that suggests c
 * Branch-Specific Knowledge
 
 ### Recommendation Output
-
 * Recommended Career
 * Career Suitability Score
 * Alternative Career Option
 
 
-## 🗄️ MySQL Database Integration
+## 🗄️ Cloud Database Integration
 
-A MySQL database is integrated into the system to store student information and prediction results.
+The application uses MySQL hosted on Aiven Cloud Database to store prediction history and student information.
 
 ### Stored Information
-
 * Student Details
 * Placement Status
 * Placement Probability
@@ -163,84 +162,104 @@ A MySQL database is integrated into the system to store student information and 
 * Career Suitability Score
 * Alternative Career Recommendation
 * Branch-Specific Skill Information
+* Prediction Timestamp
+The cloud database allows records to be securely stored and accessed from anywhere.
 
-The database allows prediction records to be stored, retrieved, and verified efficiently.
 
+## 🌐 Flask Web Application
 
-## 🌐 Streamlit Web Application
-
-A Streamlit-based web application was developed to provide a simple and interactive interface.
+A Flask-based web application was developed to provide a responsive and interactive user experience.
 
 ### Application Features
-
-* Student Information Input
-* Academic Information Entry
-* Branch-Specific Skill Assessment
+* Student Assessment Form
 * Placement Prediction
 * Career Recommendation
-* Database Storage of Results
-
+* Skill Gap Analysis
+* Prediction History
+* Cloud Database Storage
+* Mobile Responsive Design
+* Tablet Responsive Design
 The application enables real-time prediction and recommendation generation through an intuitive interface.
+
+
+## ☁️ Deployment
+
+The complete application is deployed using Render and connected to an Aiven Cloud MySQL Database.
+
+### Deployment Architecture
+User → Flask Application (Render) → Machine Learning Model → Aiven Cloud Database
 
 
 ## ✅ Testing and Validation
 
-A dedicated testing and validation phase was conducted to ensure the correctness and reliability of the system.
-
 ### Testing Areas
-
 * Dataset Validation
 * Feature Engineering Validation
 * Preprocessing Validation
 * Model Validation
 * Placement Prediction Testing
 * Career Recommendation Testing
-* MySQL Database Testing
-* Streamlit Application Testing
+* Database Testing
+* Flask Application Testing
+* Responsive Design Testing
 * Branch-Wise Recommendation Testing
 
 ### Validation Results
-
 All modules were tested successfully, and the outputs matched the expected results across all supported engineering branches.
 
 
 ## 📈 Results
 
-The system successfully predicts placement outcomes and generates career recommendations based on student profiles.
-
 ### Key Achievements
-
 * Accurate placement prediction using Machine Learning.
 * Branch-aware career recommendation system.
-* Successful integration of MySQL database.
-* Interactive Streamlit web application.
-* Complete testing and validation of all modules.
+* Cloud database integration using Aiven.
+* Deployment on Render.
+* Responsive Flask web application.
+* Complete testing and validation.
 * Support for multiple engineering disciplines.
 
 
 ## 🔮 Future Scope
 
-The project can be extended with additional features such as:
-
 * Resume Analysis
-* Skill Gap Analysis
+* Skill Gap Analysis Enhancement
 * Learning Path Recommendations
 * Interview Preparation Assistance
 * Company-Specific Placement Prediction
 * Admin Dashboard
 * User Authentication System
-* Cloud Deployment
+* AI Career Assistant Chatbot
 
 
-## 👨‍💻 Author
+## 📸 Project Screenshots
 
-**Bushra Shaikh**
+### 🏠 Home Dashboard
+![Home Dashboard](screenshots/home-dashboard.png)
 
-B.Tech Computer Science (Data Science)
+### 📋 Assessment Form
+![Assessment Form](screenshots/assessment-form.png)
 
-AI-Based Student Placement Prediction and Career Recommendation System
+### 📈 Placement Prediction
+![Placement Prediction](screenshots/placement-prediction.png)
+
+### 🎯 Career Recommendation
+![Career Recommendation](screenshots/career-recommendation.png)
+
+### 📊 Skill Gap Analysis
+![Skill Gap Analysis](screenshots/skill-gap-analysis.png)
+
+### 🕒 Prediction History
+![Prediction History](screenshots/prediction-history.png)
 
 
 ## 📄 License
 
 This project is intended for educational and academic purposes.
+
+
+## 👨‍💻 Author
+
+**Bushra Shaikh**
+B.Tech Computer Science (Data Science)
+AI-Based Student Placement Prediction and Career Recommendation System
