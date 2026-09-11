@@ -18,13 +18,20 @@ app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY")
 
 def get_db_connection():
-    return mysql.connector.connect(
+
+    connection = mysql.connector.connect(
         host=os.getenv("MYSQL_HOST"),
         port=int(os.getenv("MYSQL_PORT")),
         user=os.getenv("MYSQL_USER"),
         password=os.getenv("MYSQL_PASSWORD"),
         database=os.getenv("MYSQL_DATABASE")
     )
+
+    cursor = connection.cursor()
+    cursor.execute("SET time_zone = '+05:30'")
+    cursor.close()
+
+    return connection
 
 @app.route("/")
 def dashboard():
